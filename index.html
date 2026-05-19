@@ -1,0 +1,1285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sawan Dasari</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0e0e0f;
+    --bg2: #161618;
+    --bg3: #1e1e21;
+    --border: rgba(255,255,255,0.07);
+    --border2: rgba(255,255,255,0.12);
+    --text: #e8e6e0;
+    --muted: #7a7870;
+    --accent: #c8b97a;
+    --accent2: #8fa88f;
+    --accent3: #7a9ec8;
+    --font-sans: 'DM Sans', sans-serif;
+    --font-mono: 'DM Mono', monospace;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(14,14,15,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2.5rem;
+    height: 56px;
+  }
+
+  .nav-logo {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 0;
+    list-style: none;
+  }
+
+  .nav-links a {
+    display: block;
+    padding: 0 1rem;
+    height: 56px;
+    line-height: 56px;
+    font-size: 13px;
+    font-family: var(--font-mono);
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.03em;
+    transition: color 0.2s;
+    cursor: pointer;
+  }
+
+  .nav-links a:hover, .nav-links a.active { color: var(--text); }
+  .nav-links a.active { color: var(--accent); }
+
+  /* PAGES */
+  .page {
+    display: none;
+    min-height: 100vh;
+    padding-top: 56px;
+  }
+  .page.active { display: block; }
+
+  /* HERO */
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 4rem;
+    align-items: center;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 7rem 2.5rem 5rem;
+  }
+
+  .hero-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--accent);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-name {
+    font-size: clamp(2.8rem, 5vw, 4.2rem);
+    font-weight: 300;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+    color: var(--text);
+  }
+
+  .hero-name span { color: var(--accent); }
+
+  .hero-desc {
+    color: var(--muted);
+    font-size: 16px;
+    line-height: 1.8;
+    max-width: 520px;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-desc strong { color: var(--text); font-weight: 400; }
+
+  .hero-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 2.5rem;
+  }
+
+  .tag {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    padding: 4px 10px;
+    border: 1px solid var(--border2);
+    border-radius: 3px;
+    color: var(--muted);
+    letter-spacing: 0.03em;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    transition: all 0.2s;
+    display: inline-block;
+    border: none;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: #0e0e0f;
+  }
+
+  .btn-primary:hover { background: #d4c68a; }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--muted);
+    border: 1px solid var(--border2);
+  }
+
+  .btn-ghost:hover { color: var(--text); border-color: var(--border2); background: var(--bg3); }
+
+  /* PHOTO */
+  .hero-photo {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 2rem;
+  }
+
+  .photo-frame {
+    width: 260px;
+    height: 300px;
+    border-radius: 4px;
+    border: 1px solid var(--border2);
+    overflow: hidden;
+    position: relative;
+    background: var(--bg3);
+  }
+
+  .photo-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .photo-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    color: var(--muted);
+  }
+
+  .photo-placeholder-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: var(--bg2);
+    border: 1px solid var(--border2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-weight: 300;
+  }
+
+  .photo-placeholder span {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+  }
+
+  .photo-accent {
+    position: absolute;
+    bottom: -1px; right: -1px;
+    width: 60px; height: 60px;
+    border-top: 1px solid var(--accent);
+    border-left: 1px solid var(--accent);
+    border-radius: 2px 0 0 0;
+    pointer-events: none;
+  }
+
+  /* DIVIDER */
+  .divider {
+    max-width: 1100px;
+    margin: 0 auto 4rem;
+    padding: 0 2.5rem;
+    border-top: 1px solid var(--border);
+  }
+
+  /* SECTION */
+  .section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 4rem 2.5rem;
+  }
+
+  .section-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 2rem;
+  }
+
+  .section-title {
+    font-size: 1.9rem;
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    margin-bottom: 2.5rem;
+    color: var(--text);
+  }
+
+  /* QUICK STATS on home */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 4rem;
+  }
+
+  .stat-cell {
+    background: var(--bg2);
+    padding: 1.5rem;
+  }
+
+  .stat-num {
+    font-size: 2rem;
+    font-weight: 300;
+    font-family: var(--font-mono);
+    color: var(--accent);
+    letter-spacing: -0.02em;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .stat-label {
+    font-size: 12px;
+    color: var(--muted);
+    font-family: var(--font-mono);
+  }
+
+  /* EXPERIENCE */
+  .exp-list { display: flex; flex-direction: column; gap: 0; }
+
+  .exp-item {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 2rem;
+    padding: 2rem 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .exp-item:last-child { border-bottom: 1px solid var(--border); }
+
+  .exp-meta {
+    padding-top: 2px;
+  }
+
+  .exp-period {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+    margin-bottom: 4px;
+  }
+
+  .exp-loc {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--accent2);
+    letter-spacing: 0.02em;
+  }
+
+  .exp-role {
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .exp-company {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--accent);
+    margin-bottom: 1rem;
+    letter-spacing: 0.03em;
+  }
+
+  .exp-desc {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.75;
+  }
+
+  .exp-desc li { margin-bottom: 6px; margin-left: 1.2rem; }
+  .exp-desc li::marker { color: var(--accent); }
+
+  .exp-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 1rem;
+  }
+
+  .stack-tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    padding: 3px 8px;
+    border: 1px solid var(--border2);
+    border-radius: 2px;
+    color: var(--muted);
+  }
+
+  /* PROJECTS */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .project-card {
+    background: var(--bg2);
+    padding: 1.75rem;
+    cursor: pointer;
+    transition: background 0.2s;
+    position: relative;
+  }
+
+  .project-card:hover { background: var(--bg3); }
+
+  .project-card-num {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--border2);
+    margin-bottom: 1rem;
+    letter-spacing: 0.08em;
+  }
+
+  .project-card-title {
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+
+  .project-card-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 1rem;
+  }
+
+  .project-card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .project-card-tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    padding: 2px 7px;
+    border-radius: 2px;
+    border: 1px solid var(--border);
+    color: var(--muted);
+  }
+
+  .project-link {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--muted);
+    text-decoration: none;
+    border: 1px solid var(--border);
+    padding: 4px 10px;
+    border-radius: 3px;
+    transition: all 0.2s;
+  }
+
+  .project-link:hover { color: var(--accent); border-color: var(--accent); }
+
+  /* EDUCATION */
+  .edu-list { display: flex; flex-direction: column; gap: 0; }
+
+  .edu-item {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 2rem;
+    padding: 2rem 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .edu-item:last-child { border-bottom: 1px solid var(--border); }
+
+  .edu-year {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--muted);
+    padding-top: 2px;
+  }
+
+  .edu-degree {
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .edu-school {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--accent);
+    margin-bottom: 8px;
+    letter-spacing: 0.03em;
+  }
+
+  .edu-note {
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  /* SKILLS PAGE */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 3rem;
+  }
+
+  .skill-group {
+    background: var(--bg2);
+    padding: 1.75rem;
+  }
+
+  .skill-group-title {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.25rem;
+  }
+
+  .skill-items {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .skill-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .skill-name {
+    font-size: 13px;
+    color: var(--text);
+  }
+
+  .skill-bar-track {
+    flex: 1;
+    height: 2px;
+    background: var(--border2);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .skill-bar-fill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 2px;
+    transform-origin: left;
+    transform: scaleX(0);
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .skill-bar-fill.animated { transform: scaleX(1); }
+
+  /* ABOUT footer */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  .about-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.75rem;
+  }
+
+  .about-card-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+
+  .about-card p {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+
+  .about-card p strong { color: var(--text); font-weight: 400; }
+
+  /* CONTACT */
+  .contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    max-width: 600px;
+  }
+
+  .contact-link-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 1.5rem;
+    background: var(--bg2);
+    text-decoration: none;
+    transition: background 0.2s;
+    cursor: pointer;
+  }
+
+  .contact-link-row:hover { background: var(--bg3); }
+
+  .contact-link-label {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+  }
+
+  .contact-link-value {
+    font-size: 15px;
+    color: var(--text);
+  }
+
+  .contact-arrow {
+    color: var(--accent);
+    font-size: 18px;
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem 2.5rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  footer p {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .fade-up { animation: fadeUp 0.55s ease both; }
+  .delay-1 { animation-delay: 0.1s; }
+  .delay-2 { animation-delay: 0.2s; }
+  .delay-3 { animation-delay: 0.3s; }
+  .delay-4 { animation-delay: 0.4s; }
+  .delay-5 { animation-delay: 0.5s; }
+
+  /* CURSOR DOT */
+  .cursor-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    position: fixed;
+    top: 0; left: 0;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.1s ease, opacity 0.2s;
+    mix-blend-mode: difference;
+  }
+
+  /* TYPING ANIMATION */
+  .typed-text::after {
+    content: '|';
+    animation: blink 1s step-end infinite;
+    color: var(--accent);
+    margin-left: 2px;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  /* MOBILE */
+  @media (max-width: 768px) {
+    .hero { grid-template-columns: 1fr; padding: 4rem 1.5rem 3rem; }
+    .hero-photo { order: -1; }
+    .stats-row { grid-template-columns: repeat(2, 1fr); }
+    .projects-grid { grid-template-columns: 1fr; }
+    .skills-grid { grid-template-columns: 1fr; }
+    .exp-item, .edu-item { grid-template-columns: 1fr; gap: 0.5rem; }
+    .about-grid { grid-template-columns: 1fr; }
+    nav { padding: 0 1.5rem; }
+    .nav-links a { padding: 0 0.6rem; font-size: 11px; }
+    .section { padding: 3rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor-dot" id="cursor"></div>
+
+<nav>
+  <a class="nav-logo" onclick="showPage('home')">sd.</a>
+  <ul class="nav-links">
+    <li><a onclick="showPage('home')" class="active" id="nav-home">home</a></li>
+    <li><a onclick="showPage('experience')" id="nav-experience">experience</a></li>
+    <li><a onclick="showPage('projects')" id="nav-projects">projects</a></li>
+    <li><a onclick="showPage('education')" id="nav-education">education</a></li>
+    <li><a onclick="showPage('skills')" id="nav-skills">skills</a></li>
+    <li><a onclick="showPage('contact')" id="nav-contact">contact</a></li>
+  </ul>
+</nav>
+
+<!-- HOME PAGE -->
+<div class="page active" id="page-home">
+  <div class="hero">
+    <div>
+      <p class="hero-eyebrow fade-up">Software Engineer · NYC</p>
+      <h1 class="hero-name fade-up delay-1">Sawan<br><span>Dasari</span></h1>
+      <p class="hero-desc fade-up delay-2">
+        <strong>Engineer by day, builder by night.</strong> I work on cloud-native data platforms at JPMorgan Chase — high-throughput pipelines, distributed systems, infrastructure that doesn't flinch. After hours, I'm usually deep in something new: AI agents, Android prototypes, or whatever idea I can't stop thinking about.
+      </p>
+      <div class="hero-tags fade-up delay-3">
+        <span class="tag">Kafka · Flink</span>
+        <span class="tag">AWS · Kubernetes</span>
+        <span class="tag">Java · Spring Boot</span>
+        <span class="tag">Terraform</span>
+        <span class="tag">AI Agents</span>
+        <span class="tag">Fintech</span>
+      </div>
+      <div class="hero-actions fade-up delay-4">
+        <a class="btn btn-primary" onclick="showPage('projects')">View Projects</a>
+        <a class="btn btn-ghost" href="https://github.com/sa1dasari" target="_blank">GitHub</a>
+        <a class="btn btn-ghost" onclick="showPage('contact')">Get in touch</a>
+      </div>
+    </div>
+    <div class="hero-photo fade-up delay-2">
+      <div class="photo-frame">
+        <img src="img.jpg" alt="Sawan Dasari">
+        <div class="photo-accent"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" style="padding-top: 0;">
+    <div class="stats-row fade-up delay-5">
+      <div class="stat-cell">
+        <div class="stat-num">4+</div>
+        <div class="stat-label">years experience</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num">2</div>
+        <div class="stat-label">companies</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num">∞</div>
+        <div class="stat-label">ideas in motion</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num">10k+</div>
+        <div class="stat-label">cups of coffee</div>
+      </div>
+    </div>
+
+    <div class="about-grid">
+      <div class="about-card">
+        <div class="about-card-label">Day job</div>
+        <p>Building <strong>cloud-native data platforms</strong> at JPMorgan Chase — Kafka streams, Flink pipelines, AWS infrastructure, Kubernetes deployments, and SOC2-compliant Terraform modules. Systems that move fast and stay reliable.</p>
+      </div>
+      <div class="about-card">
+        <div class="about-card-label">Evenings</div>
+        <p>Prototyping ideas with <strong>AI agents and Claude API</strong>. Currently working on an ML research paper: Study of Drift-Triggered Retraining Policies Under Budget and Latency Constraints. Also tinkering with whatever rabbit hole catches my curiosity.</p>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <p>sa1dasari.github.io</p>
+    <p>built with html · css · js</p>
+  </footer>
+</div>
+
+<!-- EXPERIENCE PAGE -->
+<div class="page" id="page-experience">
+  <div class="section">
+    <p class="section-label">Career</p>
+    <h2 class="section-title">Work Experience</h2>
+    <div class="exp-list">
+
+      <div class="exp-item">
+        <div class="exp-meta">
+          <div class="exp-period">2025 — present</div>
+          <div class="exp-loc">New York, NY</div>
+        </div>
+        <div>
+          <div class="exp-role">Software Engineer II</div>
+          <div class="exp-company">JPMorgan Chase</div>
+          <ul class="exp-desc">
+            <li>Building and maintaining a cloud-native data platform processing millions of records daily with high availability and low latency</li>
+            <li>Designed real-time streaming pipelines using Apache Kafka and Apache Flink on AWS</li>
+            <li>Led SOC2 compliance automation via Terraform, significantly reducing manual audit overhead</li>
+            <li>Improved deployment reliability and rollback speed through Kubernetes-based CI/CD enhancements</li>
+            <li>Collaborated across engineering, compliance, and product teams on platform reliability and observability</li>
+          </ul>
+          <div class="exp-stack">
+            <span class="stack-tag">Java</span><span class="stack-tag">Spring Boot</span><span class="stack-tag">Apache Kafka</span><span class="stack-tag">Apache Flink</span><span class="stack-tag">AWS</span><span class="stack-tag">Kubernetes</span><span class="stack-tag">Terraform</span><span class="stack-tag">SOC2</span>
+          </div>
+        </div>
+      </div>
+
+       <div class="exp-item">
+         <div class="exp-meta">
+           <div class="exp-period">2024 — 2025</div>
+           <div class="exp-loc">Boston, MA</div>
+         </div>
+         <div>
+           <div class="exp-role">Software Engineer</div>
+           <div class="exp-company">State Street</div>
+           <ul class="exp-desc">
+             <li>Developed high-availability microservices using Spring Boot and Java handling credit decisioning workflows, integrating with multiple internal APIs and databases (PostgreSQL, Cassandra) to serve 5M+ requests/day</li>
+             <li>Built real-time event processing pipelines using Apache Kafka and Flink for data synchronization across distributed systems, achieving sub-second latency and exactly-once message delivery guarantees</li>
+             <li>Optimized application performance through database query tuning, caching strategies, and parallelism improvements, reducing processing latency by 40% while maintaining system stability under high load</li>
+             <li>Deployed containerized applications to Kubernetes (AWS EKS) with auto-scaling, health checks, and zero-downtime deployment strategies using Spinnaker pipelines, supporting continuous delivery practices</li>
+             <li>Implemented comprehensive testing strategy including unit tests (JUnit, Mockito), integration tests, and performance testing, achieving 95%+ code coverage and ensuring enterprise quality standards</li>
+             <li>Enhanced system observability through Datadog dashboards, Grafana metrics, and Splunk log aggregation, enabling proactive issue detection and faster incident resolution</li>
+             <li>Participated in on-call rotation, troubleshooting production issues, performing root cause analysis, and implementing preventive measures to improve system reliability and reduce recurring incidents</li>
+           </ul>
+           <div class="exp-stack">
+             <span class="stack-tag">Java</span><span class="stack-tag">Spring Boot</span><span class="stack-tag">Kafka</span><span class="stack-tag">Flink</span><span class="stack-tag">AWS EKS</span><span class="stack-tag">PostgreSQL</span><span class="stack-tag">Cassandra</span><span class="stack-tag">Kubernetes</span><span class="stack-tag">Datadog</span><span class="stack-tag">Splunk</span>
+           </div>
+         </div>
+       </div>
+
+       <div class="exp-item">
+         <div class="exp-meta">
+           <div class="exp-period">2022 — 2023</div>
+           <div class="exp-loc">Cincinnati, OH</div>
+         </div>
+         <div>
+           <div class="exp-role">Teaching Assistant</div>
+           <div class="exp-company">University of Cincinnati</div>
+           <ul class="exp-desc">
+             <li>Assisted Professor Saheed Poopla in delivering machine learning coursework by grading papers and providing hands-on support to students</li>
+             <li>Guided students through core ML concepts including regression algorithms, classification, and clustering techniques</li>
+             <li>Facilitated learning by helping students complete assignments and projects in Python notebooks, ensuring they developed practical skills in implementing machine learning solutions</li>
+             <li>Provided mentorship on best practices in model implementation, data preprocessing, and ML workflow optimization</li>
+           </ul>
+           <div class="exp-stack">
+             <span class="stack-tag">Python</span><span class="stack-tag">Machine Learning</span><span class="stack-tag">Jupyter</span><span class="stack-tag">Scikit-learn</span><span class="stack-tag">Teaching</span>
+           </div>
+         </div>
+       </div>
+
+       <div class="exp-item">
+         <div class="exp-meta">
+           <div class="exp-period">2020 — 2022</div>
+           <div class="exp-loc">Hyderabad, IN</div>
+         </div>
+         <div>
+           <div class="exp-role">Software Engineer</div>
+           <div class="exp-company">State Street</div>
+           <ul class="exp-desc">
+             <li>Developed Java-based microservices for investment data processing, implementing RESTful APIs and designing database schemas (PostgreSQL) to support reconciliation and reporting workflows handling 100M+ records</li>
+             <li>Built event-driven architecture using Apache Kafka for asynchronous data propagation between services, reducing batch processing delays by 45% and enabling near-real-time data availability</li>
+             <li>Implemented Spring Security with OAuth2 and JWT authentication, enforcing role-based access control and ensuring secure API endpoints in a regulated financial environment</li>
+             <li>Optimized data pipeline performance through SQL query optimization and caching mechanisms, reducing reconciliation processing times by 35% during peak load periods</li>
+             <li>Collaborated with cross-functional teams on system design and troubleshooting, documenting architectural decisions and performing code reviews to maintain high code quality standards</li>
+             <li>Participated in agile ceremonies and delivered features within sprint cycles while maintaining 99.5%+ system uptime for critical data processing workflows</li>
+           </ul>
+           <div class="exp-stack">
+             <span class="stack-tag">Java</span><span class="stack-tag">Spring Boot</span><span class="stack-tag">Apache Kafka</span><span class="stack-tag">PostgreSQL</span><span class="stack-tag">OAuth2</span><span class="stack-tag">JWT</span><span class="stack-tag">REST APIs</span><span class="stack-tag">Microservices</span>
+           </div>
+         </div>
+       </div>
+
+    </div>
+  </div>
+  <footer>
+    <p>sa1dasari.github.io</p>
+    <a class="btn btn-ghost" onclick="showPage('projects')" style="font-size:11px;">next: projects →</a>
+  </footer>
+</div>
+
+<!-- PROJECTS PAGE -->
+<div class="page" id="page-projects">
+  <div class="section">
+    <p class="section-label">Work</p>
+    <h2 class="section-title">GitHub Projects</h2>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <a class="project-link" href="https://github.com/sa1dasari/fullpicture" target="_blank">↗ github</a>
+        <div class="project-card-num">01</div>
+        <div class="project-card-title">fullpicture</div>
+        <div class="project-card-desc">Android app that uses a floating bubble UI to trigger screen capture and Claude API analysis — surfacing missing context, hidden incentives, and supporting evidence on social media claims. Structured output: Claim → Supported → Missing → Who It Works For → Incentive → Summary.</div>
+        <div class="project-card-tags">
+          <span class="project-card-tag">Android</span>
+          <span class="project-card-tag">Claude API</span>
+          <span class="project-card-tag">MediaProjection</span>
+          <span class="project-card-tag">OkHttp</span>
+          <span class="project-card-tag">Java</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <a class="project-link" href="https://github.com/sa1dasari/Personal-Finance-Tracker" target="_blank">↗ github</a>
+        <div class="project-card-num">02</div>
+        <div class="project-card-title">Personal Finance Tracker</div>
+        <div class="project-card-desc">A Java-based personal finance tool integrated with the Claude API — because finance tools should be able to talk back. Tracks expenses, categorizes spending, and uses AI to surface patterns and answer questions about your financial data in plain language.</div>
+        <div class="project-card-tags">
+          <span class="project-card-tag">Java</span>
+          <span class="project-card-tag">Claude API</span>
+          <span class="project-card-tag">Spring Boot</span>
+          <span class="project-card-tag">AI</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <a class="project-link" href="https://github.com/sa1dasari" target="_blank">↗ github</a>
+        <div class="project-card-num">03</div>
+        <div class="project-card-title">ML Drift Retraining Study</div>
+        <div class="project-card-desc">An independent research study exploring drift-triggered retraining policies for streaming ML systems under budget and latency constraints. Investigates when and how to retrigger model training in production environments as data distributions shift over time.</div>
+        <div class="project-card-tags">
+          <span class="project-card-tag">Python</span>
+          <span class="project-card-tag">Streaming ML</span>
+          <span class="project-card-tag">Drift Detection</span>
+          <span class="project-card-tag">Research</span>
+        </div>
+      </div>
+
+       <div class="project-card">
+         <a class="project-link" href="https://github.com/sa1dasari/tailoring_resume" target="_blank">↗ github</a>
+         <div class="project-card-num">04</div>
+         <div class="project-card-title">tailoring_resume</div>
+         <div class="project-card-desc">Tooling built to stop sending the same resume to every job. Automates the process of tailoring resume content to specific job descriptions — extracting keywords, matching experience, and generating targeted bullet points. Built for real use during an active job search.</div>
+         <div class="project-card-tags">
+           <span class="project-card-tag">Python</span>
+           <span class="project-card-tag">NLP</span>
+           <span class="project-card-tag">Automation</span>
+           <span class="project-card-tag">AI</span>
+         </div>
+       </div>
+
+       <div class="project-card">
+         <a class="project-link" href="https://github.com/sa1dasari/paper-to-prototype" target="_blank">↗ github</a>
+         <div class="project-card-num">05</div>
+         <div class="project-card-title">paper-to-prototype</div>
+         <div class="project-card-desc">An AI-powered agent that transforms ML research papers into runnable Jupyter notebooks. Drop in a PDF → get back executable PyTorch code with toy datasets and reproduced figures. Features an agentic loop that reads papers, generates notebooks, executes them, handles tracebacks, and iterates up to 5 times until success.</div>
+         <div class="project-card-tags">
+           <span class="project-card-tag">Python</span>
+           <span class="project-card-tag">Claude API</span>
+           <span class="project-card-tag">PyTorch</span>
+           <span class="project-card-tag">Agent Loop</span>
+           <span class="project-card-tag">ML Research</span>
+         </div>
+       </div>
+
+       <div class="project-card">
+         <a class="project-link" href="Fatal Police Shootings Dataset.html" target="_blank">↗ view</a>
+         <div class="project-card-num">06</div>
+         <div class="project-card-title">Fatal Police Shootings Analysis</div>
+         <div class="project-card-desc">Data-driven analysis of 5+ years of fatal police shooting data (2015-2020) investigating racial disparities, demographic patterns, and geographic trends. Applied predictive modeling with -0.780 Pearson correlation coefficient between year and shooting frequency, statistical hypothesis testing with p-value analysis, and multivariate analysis across race, age, and geography dimensions.</div>
+         <div class="project-card-tags">
+           <span class="project-card-tag">Python</span>
+           <span class="project-card-tag">Statistical Analysis</span>
+           <span class="project-card-tag">Machine Learning</span>
+           <span class="project-card-tag">Data Science</span>
+           <span class="project-card-tag">SciPy</span>
+         </div>
+       </div>
+
+       <div class="project-card">
+         <a class="project-link" href="Acccident Detection PRJCT.pptx" target="_blank">↗ slides</a>
+         <div class="project-card-num">07</div>
+         <div class="project-card-title">Automatic Accident Detection System</div>
+         <div class="project-card-desc">Intelligent Object Detection and Tracking System (ODTS) combining Faster R-CNN and YOLO for real-time accident detection in CCTV footage. Achieved 84.79% AP for cars, 71.61% for persons, and 90.85% for fire detection. built unique tracking mechanism assigning IDs to moving objects, enabling accident detection within 10 seconds across vehicle collisions, pedestrian incidents, and fire events.</div>
+         <div class="project-card-tags">
+           <span class="project-card-tag">Python</span>
+           <span class="project-card-tag">Faster R-CNN</span>
+           <span class="project-card-tag">YOLO</span>
+           <span class="project-card-tag">Computer Vision</span>
+           <span class="project-card-tag">OpenCV</span>
+         </div>
+       </div>
+
+       <div class="project-card">
+         <a class="project-link" href="FFD.pptx" target="_blank">↗ slides</a>
+         <div class="project-card-num">08</div>
+         <div class="project-card-title">IoT Food Freshness Detection System</div>
+         <div class="project-card-desc">Embedded IoT system integrating Arduino Uno with multi-sensor array (pH, MQ-series gas, moisture sensors) for automated food spoilage detection. HC-05 Bluetooth wireless communication with custom Android app. Sensor fusion with threshold-based classification achieving 85%+ detection accuracy at ~$50 BOM. Detects bacterial contamination preventing foodborne illnesses with <5 second response time.</div>
+         <div class="project-card-tags">
+           <span class="project-card-tag">Arduino</span>
+           <span class="project-card-tag">IoT</span>
+           <span class="project-card-tag">Embedded C/C++</span>
+           <span class="project-card-tag">Android</span>
+           <span class="project-card-tag">Sensor Fusion</span>
+         </div>
+       </div>
+
+    </div>
+  </div>
+  <footer>
+    <p>sa1dasari.github.io</p>
+    <a class="btn btn-ghost" onclick="showPage('education')" style="font-size:11px;">next: education →</a>
+  </footer>
+</div>
+
+<!-- EDUCATION PAGE -->
+<div class="page" id="page-education">
+  <div class="section">
+    <p class="section-label">Academic</p>
+    <h2 class="section-title">Education</h2>
+    <div class="edu-list">
+
+      <div class="edu-item">
+        <div class="edu-year">2022 — 2023</div>
+        <div>
+          <div class="edu-degree">Master of Science, Information Technology</div>
+          <div class="edu-school">University of Cincinnati · Cincinnati, OH</div>
+          <div class="edu-note">Focused on distributed systems, cloud computing, and applied machine learning. Graduate-level coursework in data engineering, software architecture, and network systems. Built foundational knowledge that bridges software engineering and modern AI/ML practices.</div>
+        </div>
+      </div>
+
+      <div class="edu-item">
+        <div class="edu-year">2017 — 2021</div>
+        <div>
+          <div class="edu-degree">Bachelor of Technology, Computer Science</div>
+          <div class="edu-school">Hyderabad, India</div>
+          <div class="edu-note">Core computer science curriculum covering data structures, algorithms, operating systems, and software engineering fundamentals. Developed a strong foundation in Java and object-oriented design that carried directly into professional fintech work.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <footer>
+    <p>sa1dasari.github.io</p>
+    <a class="btn btn-ghost" onclick="showPage('skills')" style="font-size:11px;">next: skills →</a>
+  </footer>
+</div>
+
+<!-- SKILLS PAGE -->
+<div class="page" id="page-skills">
+  <div class="section">
+    <p class="section-label">Stack</p>
+    <h2 class="section-title">Skills & Tools</h2>
+    <div class="skills-grid" id="skills-grid">
+
+      <div class="skill-group">
+        <div class="skill-group-title">Languages</div>
+        <div class="skill-items">
+          <div class="skill-item">
+            <span class="skill-name">Java</span>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:0.95"></div></div>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name">Python</span>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:0.75"></div></div>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name">SQL</span>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:0.80"></div></div>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name">Kotlin (Android)</span>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:0.55"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-title">Backend & Streaming</div>
+        <div class="skill-items">
+          <div class="skill-item">
+            <span class="skill-name">Spring Boot</span>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:0.92"></div></div>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name">Apache Kafka</span>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:0.88"></div></div>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name">Apache Flink</span>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:0.82"></div></div>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name">REST / gRPC</span>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:0.85"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-title">Cloud & Infra</div>
+        <div class="skill-items">
+          <div class="skill-item">
+            <span class="skill-name">AWS</span>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:0.85"></div></div>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name">Kubernetes</span>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:0.80"></div></div>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name">Terraform</span>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:0.78"></div></div>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name">Docker / CI-CD</span>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:0.82"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-title">AI / Agents</div>
+        <div class="skill-items">
+          <div class="skill-item">
+            <span class="skill-name">Claude API</span>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:0.85"></div></div>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name">LLM Integration</span>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:0.78"></div></div>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name">Prompt Engineering</span>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:0.80"></div></div>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name">Streaming ML</span>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:0.70"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-title">Data & Databases</div>
+        <div class="skill-items">
+          <div class="skill-item">
+            <span class="skill-name">PostgreSQL / MySQL</span>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:0.82"></div></div>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name">Redis</span>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:0.70"></div></div>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name">AWS S3 / Glue</span>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:0.75"></div></div>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name">Data Pipelines</span>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:0.88"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-title">Practices</div>
+        <div class="skill-items">
+          <div class="skill-item">
+            <span class="skill-name">Distributed Systems</span>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:0.88"></div></div>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name">System Design</span>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:0.82"></div></div>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name">Compliance / SOC2</span>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:0.75"></div></div>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name">Agile / Scrum</span>
+            <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:0.85"></div></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <footer>
+    <p>sa1dasari.github.io</p>
+    <a class="btn btn-ghost" onclick="showPage('contact')" style="font-size:11px;">next: contact →</a>
+  </footer>
+</div>
+
+<!-- CONTACT PAGE -->
+<div class="page" id="page-contact">
+  <div class="section">
+    <p class="section-label">Reach out</p>
+    <h2 class="section-title">Get in touch</h2>
+    <p style="color: var(--muted); margin-bottom: 2.5rem; max-width: 500px; font-size: 15px; line-height: 1.8;">
+      Open to new opportunities, interesting conversations, and side project collabs. H1B transfer welcome — based in NYC, open to relocation.
+    </p>
+    <div class="contact-links">
+      <a class="contact-link-row" href="https://github.com/sa1dasari" target="_blank">
+        <div>
+          <div class="contact-link-label">GitHub</div>
+          <div class="contact-link-value">github.com/sa1dasari</div>
+        </div>
+        <span class="contact-arrow">↗</span>
+      </a>
+      <a class="contact-link-row" href="https://linkedin.com/in/sawan-dasari" target="_blank">
+        <div>
+          <div class="contact-link-label">LinkedIn</div>
+          <div class="contact-link-value">linkedin.com/in/sawan-dasari</div>
+        </div>
+        <span class="contact-arrow">↗</span>
+      </a>
+      <a class="contact-link-row" href="mailto: sawan.dasari@gmail.com">
+        <div>
+          <div class="contact-link-label">Email</div>
+          <div class="contact-link-value">sawan.dasari@gmail.com</div>
+        </div>
+        <span class="contact-arrow">↗</span>
+      </a>
+      <a class="contact-link-row" href="https://sa1dasari.github.io" target="_blank">
+        <div>
+          <div class="contact-link-label">Portfolio</div>
+          <div class="contact-link-value">sa1dasari.github.io</div>
+        </div>
+        <span class="contact-arrow">↗</span>
+      </a>
+    </div>
+  </div>
+  <footer>
+    <p>sa1dasari.github.io</p>
+    <p>Hyderabad → Cincinnati → Boston → NYC</p>
+  </footer>
+</div>
+
+<script>
+  // Cursor
+  const cursor = document.getElementById('cursor');
+  document.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX - 3 + 'px';
+    cursor.style.top = e.clientY - 3 + 'px';
+  });
+
+  // Page navigation
+  function showPage(name) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+    document.getElementById('page-' + name).classList.add('active');
+    document.getElementById('nav-' + name).classList.add('active');
+    window.scrollTo(0, 0);
+
+    // Animate skill bars when skills page opens
+    if (name === 'skills') {
+      setTimeout(() => {
+        document.querySelectorAll('.skill-bar-fill').forEach(bar => {
+          bar.style.transform = 'scaleX(' + bar.style.getPropertyValue('--w') + ')';
+        });
+      }, 150);
+    }
+  }
+
+  // Reset skill bars when leaving skills page
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+      if (!link.id.includes('skills')) {
+        document.querySelectorAll('.skill-bar-fill').forEach(bar => {
+          bar.style.transform = 'scaleX(0)';
+        });
+      }
+    });
+  });
+</script>
+</body>
+</html>
