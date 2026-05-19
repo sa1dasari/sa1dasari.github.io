@@ -690,12 +690,24 @@
     margin-left: 2px;
   }
 
-  @keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
-  }
+   @keyframes blink {
+     0%, 100% { opacity: 1; }
+     50% { opacity: 0; }
+   }
 
-  /* MOBILE */
+   /* BREAK APART ANIMATION */
+   @keyframes fallApart {
+     0% {
+       transform: translateY(0) translateX(0) rotate(0deg);
+       opacity: 1;
+     }
+     100% {
+       transform: translateY(100vh) translateX(var(--x-offset)) rotate(var(--rotation, 360deg));
+       opacity: 0;
+     }
+   }
+
+   /* MOBILE */
   @media (max-width: 768px) {
     .hero { grid-template-columns: 1fr; padding: 4rem 1.5rem 3rem; }
     .hero-photo { order: -1; }
@@ -712,7 +724,6 @@
 </head>
 <body>
 
-<div class="cursor-dot" id="cursor"></div>
 
 <nav>
   <a class="nav-logo" onclick="showPage('home')">sd.</a>
@@ -790,7 +801,7 @@
   </div>
   <footer>
     <p>sa1dasari.github.io</p>
-    <p>built with html · css · js</p>
+    <p style="cursor: pointer;" onclick="triggerBreakApart()">DO NOT CLICK HERE</p>
   </footer>
 </div>
 
@@ -1248,12 +1259,6 @@
 </div>
 
 <script>
-  // Cursor
-  const cursor = document.getElementById('cursor');
-  document.addEventListener('mousemove', e => {
-    cursor.style.left = e.clientX - 3 + 'px';
-    cursor.style.top = e.clientY - 3 + 'px';
-  });
 
   // Page navigation
   function showPage(name) {
@@ -1273,16 +1278,158 @@
     }
   }
 
-  // Reset skill bars when leaving skills page
-  document.querySelectorAll('.nav-links a').forEach(link => {
-    link.addEventListener('click', () => {
-      if (!link.id.includes('skills')) {
-        document.querySelectorAll('.skill-bar-fill').forEach(bar => {
-          bar.style.transform = 'scaleX(0)';
+   // Reset skill bars when leaving skills page
+   document.querySelectorAll('.nav-links a').forEach(link => {
+     link.addEventListener('click', () => {
+       if (!link.id.includes('skills')) {
+         document.querySelectorAll('.skill-bar-fill').forEach(bar => {
+           bar.style.transform = 'scaleX(0)';
+         });
+       }
+     });
+   });
+
+   // Break apart animation
+   let isShattered = false;
+
+   function createPixelParticles(img, rect) {
+     const canvas = document.createElement('canvas');
+     canvas.width = rect.width;
+     canvas.height = rect.height;
+     const ctx = canvas.getContext('2d');
+
+     const tempImg = new Image();
+     tempImg.crossOrigin = 'anonymous';
+     tempImg.onload = () => {
+       ctx.drawImage(tempImg, 0, 0, rect.width, rect.height);
+       const imageData = ctx.getImageData(0, 0, rect.width, rect.height);
+       const data = imageData.data;
+
+       const pixelSize = 8;
+       const particles = [];
+
+       for (let i = 0; i < rect.width; i += pixelSize) {
+         for (let j = 0; j < rect.height; j += pixelSize) {
+           const idx = (j * rect.width + i) * 4;
+           const alpha = data[idx + 3];
+
+           if (alpha > 128) {
+             const pixel = document.createElement('div');
+             pixel.style.position = 'fixed';
+             pixel.style.left = (rect.left + i) + 'px';
+             pixel.style.top = (rect.top + j) + 'px';
+             pixel.style.width = pixelSize + 'px';
+             pixel.style.height = pixelSize + 'px';
+             pixel.style.backgroundColor = `rgba(${data[idx]}, ${data[idx+1]}, ${data[idx+2]}, ${alpha/255})`;
+             pixel.style.zIndex = '10000';
+             pixel.style.pointerEvents = 'none';
+
+             const delay = Math.random() * 0.5;
+             const duration = 2 + Math.random() * 1.5;
+             const xOffset = (Math.random() - 0.5) * 300;
+
+             pixel.style.animation = `fallApart ${duration}s ease-in ${delay}s forwards`;
+             pixel.style.setProperty('--x-offset', xOffset + 'px');
+
+             document.body.appendChild(pixel);
+           }
+         }
+       }
+     };
+     tempImg.src = img.src;
+   }
+
+    function triggerBreakApart() {
+      if (isShattered) return;
+      isShattered = true;
+
+      const body = document.body;
+      body.style.background = 'var(--bg)';
+
+      const allElements = document.querySelectorAll('body *');
+      const fragment = document.createDocumentFragment();
+      const charWidth = 8; // Approximate average character width
+
+      allElements.forEach(el => {
+        if (el.tagName === 'NAV' || el.tagName === 'SCRIPT' || el.tagName === 'STYLE' || getComputedStyle(el).display === 'none') return;
+        if (el.parentElement && el.parentElement.dataset.isParticle) return;
+
+        const rect = el.getBoundingClientRect();
+        if (rect.width === 0 || rect.height === 0) return;
+
+        // Handle images - create pixel particles
+        if (el.tagName === 'IMG') {
+          createPixelParticles(el, rect);
+          return;
+        }
+
+        // Handle text - break into individual letters
+        const text = el.textContent.trim();
+        if (text.length === 0) return;
+
+        const fontSize = getComputedStyle(el).fontSize;
+        const fontFamily = getComputedStyle(el).fontFamily;
+        const fontWeight = getComputedStyle(el).fontWeight;
+        const color = getComputedStyle(el).color;
+
+        let xPos = rect.left;
+        const yPos = rect.top;
+
+        Array.from(text).forEach((letter, idx) => {
+          const letterSpan = document.createElement('span');
+          letterSpan.textContent = letter;
+          letterSpan.style.position = 'fixed';
+          letterSpan.style.left = xPos + 'px';
+          letterSpan.style.top = yPos + 'px';
+          letterSpan.style.fontSize = fontSize;
+          letterSpan.style.fontFamily = fontFamily;
+          letterSpan.style.fontWeight = fontWeight;
+          letterSpan.style.color = color;
+          letterSpan.style.zIndex = '10000';
+          letterSpan.style.pointerEvents = 'none';
+          letterSpan.style.whiteSpace = 'nowrap';
+          letterSpan.style.display = 'inline-block';
+          letterSpan.dataset.isParticle = true;
+
+          const delay = (idx * 0.02) + (Math.random() * 0.2);
+          const duration = 2 + Math.random() * 1.5;
+          const xOffset = (Math.random() - 0.5) * 400;
+          const rotation = (Math.random() - 0.5) * 720;
+
+          letterSpan.style.animation = `fallApart ${duration}s ease-in ${delay}s forwards`;
+          letterSpan.style.setProperty('--x-offset', xOffset + 'px');
+          letterSpan.style.setProperty('--rotation', rotation + 'deg');
+
+          fragment.appendChild(letterSpan);
+          xPos += charWidth;
         });
-      }
-    });
-  });
+      });
+
+      document.body.appendChild(fragment);
+
+      // Hide original content
+      const activePage = document.querySelector('.page.active');
+      if (activePage) activePage.style.opacity = '0';
+      document.querySelector('nav').style.opacity = '0';
+
+      // Show reset message after animation
+      setTimeout(() => {
+        const resetMsg = document.createElement('div');
+        resetMsg.style.position = 'fixed';
+        resetMsg.style.top = '50%';
+        resetMsg.style.left = '50%';
+        resetMsg.style.transform = 'translate(-50%, -50%)';
+        resetMsg.style.zIndex = '10001';
+        resetMsg.style.color = 'var(--accent)';
+        resetMsg.style.fontFamily = 'var(--font-mono)';
+        resetMsg.style.fontSize = '14px';
+        resetMsg.style.letterSpacing = '0.05em';
+        resetMsg.style.opacity = '0.6';
+        resetMsg.style.textAlign = 'center';
+        resetMsg.innerHTML = '<p style="margin: 0;">I said not to click -_-</p><p style="margin-top: 1rem; opacity: 0.5; font-size: 12px;">Refresh To Reset</p>';
+        document.body.appendChild(resetMsg);
+      }, 3000);
+    }
 </script>
 </body>
 </html>
