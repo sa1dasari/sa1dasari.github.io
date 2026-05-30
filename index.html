@@ -325,9 +325,7 @@
 
   .exp-item:last-child { border-bottom: 1px solid var(--border); }
 
-  .exp-meta {
-    padding-top: 2px;
-  }
+    .exp-meta { padding-top: 2px; }
 
   .exp-period {
     font-family: var(--font-mono);
@@ -405,13 +403,88 @@
 
   .project-card:hover { background: var(--bg3); }
 
-  .project-card-num {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    color: var(--border2);
-    margin-bottom: 1rem;
-    letter-spacing: 0.08em;
-  }
+    /* Featured project card — spans full width */
+    .project-card.featured {
+      grid-column: 1 / -1;
+      border-bottom: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1.5rem;
+      align-items: start;
+    }
+
+    .project-card.featured .project-card-desc {
+      max-width: 680px;
+    }
+
+    /* Live badge */
+    .live-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--accent2);
+      border: 1px solid var(--accent2);
+      padding: 3px 9px;
+      border-radius: 20px;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.75rem;
+    }
+
+    .live-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--accent2);
+      border-radius: 50%;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.8); }
+    }
+
+    /* Wordle tile preview */
+    .wordle-preview {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      align-self: center;
+      opacity: 0.85;
+    }
+
+    .wordle-row {
+      display: flex;
+      gap: 4px;
+    }
+
+    .w-tile {
+      width: 28px;
+      height: 28px;
+      border-radius: 3px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      letter-spacing: 0;
+    }
+
+    .w-tile.g { background: #6aaa64; }
+    .w-tile.y { background: #b59f3b; }
+    .w-tile.x { background: #787c7e; }
+    .w-tile.e { background: transparent; border: 1px solid rgba(255,255,255,0.1); color: var(--muted); }
+
+    .project-card-num {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--border2);
+      margin-bottom: 1rem;
+      letter-spacing: 0.08em;
+    }
 
   .project-card-title {
     font-size: 16px;
@@ -458,8 +531,31 @@
 
   .project-link:hover { color: var(--accent); border-color: var(--accent); }
 
-  /* EDUCATION */
-  .edu-list { display: flex; flex-direction: column; gap: 0; }
+    /* Featured project links row */
+    .featured-links {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+
+    .featured-link {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--muted);
+      text-decoration: none;
+      border: 1px solid var(--border);
+      padding: 5px 12px;
+      border-radius: 3px;
+      transition: all 0.2s;
+    }
+
+    .featured-link:hover { color: var(--accent); border-color: var(--accent); }
+    .featured-link.primary { color: var(--accent2); border-color: var(--accent2); }
+    .featured-link.primary:hover { background: rgba(143,168,143,0.1); }
+
+    /* EDUCATION */
+    .edu-list { display: flex; flex-direction: column; gap: 0; }
 
   .edu-item {
     display: grid;
@@ -524,11 +620,7 @@
     margin-bottom: 1.25rem;
   }
 
-  .skill-items {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
+    .skill-items { display: flex; flex-direction: column; gap: 10px; }
 
   .skill-item {
     display: flex;
@@ -537,10 +629,7 @@
     gap: 12px;
   }
 
-  .skill-name {
-    font-size: 13px;
-    color: var(--text);
-  }
+    .skill-name { font-size: 13px; color: var(--text); }
 
   .skill-bar-track {
     flex: 1;
@@ -585,13 +674,8 @@
     margin-bottom: 1rem;
   }
 
-  .about-card p {
-    font-size: 14px;
-    color: var(--muted);
-    line-height: 1.8;
-  }
-
-  .about-card p strong { color: var(--text); font-weight: 400; }
+    .about-card p { font-size: 14px; color: var(--muted); line-height: 1.8; }
+    .about-card p strong { color: var(--text); font-weight: 400; }
 
   /* CONTACT */
   .contact-links {
@@ -627,15 +711,8 @@
     margin-bottom: 2px;
   }
 
-  .contact-link-value {
-    font-size: 15px;
-    color: var(--text);
-  }
-
-  .contact-arrow {
-    color: var(--accent);
-    font-size: 18px;
-  }
+    .contact-link-value { font-size: 15px; color: var(--text); }
+    .contact-arrow { color: var(--accent); font-size: 18px; }
 
   /* FOOTER */
   footer {
@@ -668,62 +745,43 @@
   .delay-4 { animation-delay: 0.4s; }
   .delay-5 { animation-delay: 0.5s; }
 
-  /* CURSOR DOT */
-  .cursor-dot {
-    width: 6px;
-    height: 6px;
-    background: var(--accent);
-    border-radius: 50%;
-    position: fixed;
-    top: 0; left: 0;
-    pointer-events: none;
-    z-index: 9999;
-    transition: transform 0.1s ease, opacity 0.2s;
-    mix-blend-mode: difference;
-  }
+    /* TYPING ANIMATION */
+    .typed-text::after {
+      content: '|';
+      animation: blink 1s step-end infinite;
+      color: var(--accent);
+      margin-left: 2px;
+    }
 
-  /* TYPING ANIMATION */
-  .typed-text::after {
-    content: '|';
-    animation: blink 1s step-end infinite;
-    color: var(--accent);
-    margin-left: 2px;
-  }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
 
-   @keyframes blink {
-     0%, 100% { opacity: 1; }
-     50% { opacity: 0; }
-   }
+    /* BREAK APART ANIMATION */
+    @keyframes fallApart {
+      0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(100vh) translateX(var(--x-offset)) rotate(var(--rotation, 360deg)); opacity: 0; }
+    }
 
-   /* BREAK APART ANIMATION */
-   @keyframes fallApart {
-     0% {
-       transform: translateY(0) translateX(0) rotate(0deg);
-       opacity: 1;
-     }
-     100% {
-       transform: translateY(100vh) translateX(var(--x-offset)) rotate(var(--rotation, 360deg));
-       opacity: 0;
-     }
-   }
-
-   /* MOBILE */
-  @media (max-width: 768px) {
-    .hero { grid-template-columns: 1fr; padding: 4rem 1.5rem 3rem; }
-    .hero-photo { order: -1; }
-    .stats-row { grid-template-columns: repeat(2, 1fr); }
-    .projects-grid { grid-template-columns: 1fr; }
-    .skills-grid { grid-template-columns: 1fr; }
-    .exp-item, .edu-item { grid-template-columns: 1fr; gap: 0.5rem; }
-    .about-grid { grid-template-columns: 1fr; }
-    nav { padding: 0 1.5rem; }
-    .nav-links a { padding: 0 0.6rem; font-size: 11px; }
-    .section { padding: 3rem 1.5rem; }
-  }
-</style>
+    /* MOBILE */
+    @media (max-width: 768px) {
+      .hero { grid-template-columns: 1fr; padding: 4rem 1.5rem 3rem; }
+      .hero-photo { order: -1; }
+      .stats-row { grid-template-columns: repeat(2, 1fr); }
+      .projects-grid { grid-template-columns: 1fr; }
+      .project-card.featured { grid-template-columns: 1fr; }
+      .wordle-preview { display: none; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .exp-item, .edu-item { grid-template-columns: 1fr; gap: 0.5rem; }
+      .about-grid { grid-template-columns: 1fr; }
+      nav { padding: 0 1.5rem; }
+      .nav-links a { padding: 0 0.6rem; font-size: 11px; }
+      .section { padding: 3rem 1.5rem; }
+    }
+  </style>
 </head>
 <body>
-
 
 <nav>
   <a class="nav-logo" onclick="showPage('home')">sd.</a>
@@ -833,70 +891,70 @@
         </div>
       </div>
 
-       <div class="exp-item">
-         <div class="exp-meta">
-           <div class="exp-period">2024 — 2025</div>
-           <div class="exp-loc">Boston, MA</div>
-         </div>
-         <div>
-           <div class="exp-role">Software Engineer</div>
-           <div class="exp-company">State Street</div>
-           <ul class="exp-desc">
-             <li>Developed high-availability microservices using Spring Boot and Java handling credit decisioning workflows, integrating with multiple internal APIs and databases (PostgreSQL, Cassandra) to serve 5M+ requests/day</li>
-             <li>Built real-time event processing pipelines using Apache Kafka and Flink for data synchronization across distributed systems, achieving sub-second latency and exactly-once message delivery guarantees</li>
-             <li>Optimized application performance through database query tuning, caching strategies, and parallelism improvements, reducing processing latency by 40% while maintaining system stability under high load</li>
-             <li>Deployed containerized applications to Kubernetes (AWS EKS) with auto-scaling, health checks, and zero-downtime deployment strategies using Spinnaker pipelines, supporting continuous delivery practices</li>
-             <li>Implemented comprehensive testing strategy including unit tests (JUnit, Mockito), integration tests, and performance testing, achieving 95%+ code coverage and ensuring enterprise quality standards</li>
-             <li>Enhanced system observability through Datadog dashboards, Grafana metrics, and Splunk log aggregation, enabling proactive issue detection and faster incident resolution</li>
-             <li>Participated in on-call rotation, troubleshooting production issues, performing root cause analysis, and implementing preventive measures to improve system reliability and reduce recurring incidents</li>
-           </ul>
-           <div class="exp-stack">
-             <span class="stack-tag">Java</span><span class="stack-tag">Spring Boot</span><span class="stack-tag">Kafka</span><span class="stack-tag">Flink</span><span class="stack-tag">AWS EKS</span><span class="stack-tag">PostgreSQL</span><span class="stack-tag">Cassandra</span><span class="stack-tag">Kubernetes</span><span class="stack-tag">Datadog</span><span class="stack-tag">Splunk</span>
-           </div>
-         </div>
-       </div>
+      <div class="exp-item">
+        <div class="exp-meta">
+          <div class="exp-period">2024 — 2025</div>
+          <div class="exp-loc">Boston, MA</div>
+        </div>
+        <div>
+          <div class="exp-role">Software Engineer</div>
+          <div class="exp-company">State Street</div>
+          <ul class="exp-desc">
+            <li>Developed high-availability microservices using Spring Boot and Java handling credit decisioning workflows, integrating with multiple internal APIs and databases (PostgreSQL, Cassandra) to serve 5M+ requests/day</li>
+            <li>Built real-time event processing pipelines using Apache Kafka and Flink for data synchronization across distributed systems, achieving sub-second latency and exactly-once message delivery guarantees</li>
+            <li>Optimized application performance through database query tuning, caching strategies, and parallelism improvements, reducing processing latency by 40% while maintaining system stability under high load</li>
+            <li>Deployed containerized applications to Kubernetes (AWS EKS) with auto-scaling, health checks, and zero-downtime deployment strategies using Spinnaker pipelines, supporting continuous delivery practices</li>
+            <li>Implemented comprehensive testing strategy including unit tests (JUnit, Mockito), integration tests, and performance testing, achieving 95%+ code coverage and ensuring enterprise quality standards</li>
+            <li>Enhanced system observability through Datadog dashboards, Grafana metrics, and Splunk log aggregation, enabling proactive issue detection and faster incident resolution</li>
+            <li>Participated in on-call rotation, troubleshooting production issues, performing root cause analysis, and implementing preventive measures to improve system reliability and reduce recurring incidents</li>
+          </ul>
+          <div class="exp-stack">
+            <span class="stack-tag">Java</span><span class="stack-tag">Spring Boot</span><span class="stack-tag">Kafka</span><span class="stack-tag">Flink</span><span class="stack-tag">AWS EKS</span><span class="stack-tag">PostgreSQL</span><span class="stack-tag">Cassandra</span><span class="stack-tag">Kubernetes</span><span class="stack-tag">Datadog</span><span class="stack-tag">Splunk</span>
+          </div>
+        </div>
+      </div>
 
-       <div class="exp-item">
-         <div class="exp-meta">
-           <div class="exp-period">2022 — 2023</div>
-           <div class="exp-loc">Cincinnati, OH</div>
-         </div>
-         <div>
-           <div class="exp-role">Teaching Assistant</div>
-           <div class="exp-company">University of Cincinnati</div>
-           <ul class="exp-desc">
-             <li>Assisted Professor Saheed Poopla in delivering machine learning coursework by grading papers and providing hands-on support to students</li>
-             <li>Guided students through core ML concepts including regression algorithms, classification, and clustering techniques</li>
-             <li>Facilitated learning by helping students complete assignments and projects in Python notebooks, ensuring they developed practical skills in implementing machine learning solutions</li>
-             <li>Provided mentorship on best practices in model implementation, data preprocessing, and ML workflow optimization</li>
-           </ul>
-           <div class="exp-stack">
-             <span class="stack-tag">Python</span><span class="stack-tag">Machine Learning</span><span class="stack-tag">Jupyter</span><span class="stack-tag">Scikit-learn</span><span class="stack-tag">Teaching</span>
-           </div>
-         </div>
-       </div>
+      <div class="exp-item">
+        <div class="exp-meta">
+          <div class="exp-period">2022 — 2023</div>
+          <div class="exp-loc">Cincinnati, OH</div>
+        </div>
+        <div>
+          <div class="exp-role">Teaching Assistant</div>
+          <div class="exp-company">University of Cincinnati</div>
+          <ul class="exp-desc">
+            <li>Assisted Professor Saheed Poopla in delivering machine learning coursework by grading papers and providing hands-on support to students</li>
+            <li>Guided students through core ML concepts including regression algorithms, classification, and clustering techniques</li>
+            <li>Facilitated learning by helping students complete assignments and projects in Python notebooks, ensuring they developed practical skills in implementing machine learning solutions</li>
+            <li>Provided mentorship on best practices in model implementation, data preprocessing, and ML workflow optimization</li>
+          </ul>
+          <div class="exp-stack">
+            <span class="stack-tag">Python</span><span class="stack-tag">Machine Learning</span><span class="stack-tag">Jupyter</span><span class="stack-tag">Scikit-learn</span><span class="stack-tag">Teaching</span>
+          </div>
+        </div>
+      </div>
 
-       <div class="exp-item">
-         <div class="exp-meta">
-           <div class="exp-period">2020 — 2022</div>
-           <div class="exp-loc">Hyderabad, IN</div>
-         </div>
-         <div>
-           <div class="exp-role">Software Engineer</div>
-           <div class="exp-company">State Street</div>
-           <ul class="exp-desc">
-             <li>Developed Java-based microservices for investment data processing, implementing RESTful APIs and designing database schemas (PostgreSQL) to support reconciliation and reporting workflows handling 100M+ records</li>
-             <li>Built event-driven architecture using Apache Kafka for asynchronous data propagation between services, reducing batch processing delays by 45% and enabling near-real-time data availability</li>
-             <li>Implemented Spring Security with OAuth2 and JWT authentication, enforcing role-based access control and ensuring secure API endpoints in a regulated financial environment</li>
-             <li>Optimized data pipeline performance through SQL query optimization and caching mechanisms, reducing reconciliation processing times by 35% during peak load periods</li>
-             <li>Collaborated with cross-functional teams on system design and troubleshooting, documenting architectural decisions and performing code reviews to maintain high code quality standards</li>
-             <li>Participated in agile ceremonies and delivered features within sprint cycles while maintaining 99.5%+ system uptime for critical data processing workflows</li>
-           </ul>
-           <div class="exp-stack">
-             <span class="stack-tag">Java</span><span class="stack-tag">Spring Boot</span><span class="stack-tag">Apache Kafka</span><span class="stack-tag">PostgreSQL</span><span class="stack-tag">OAuth2</span><span class="stack-tag">JWT</span><span class="stack-tag">REST APIs</span><span class="stack-tag">Microservices</span>
-           </div>
-         </div>
-       </div>
+      <div class="exp-item">
+        <div class="exp-meta">
+          <div class="exp-period">2020 — 2022</div>
+          <div class="exp-loc">Hyderabad, IN</div>
+        </div>
+        <div>
+          <div class="exp-role">Software Engineer</div>
+          <div class="exp-company">State Street</div>
+          <ul class="exp-desc">
+            <li>Developed Java-based microservices for investment data processing, implementing RESTful APIs and designing database schemas (PostgreSQL) to support reconciliation and reporting workflows handling 100M+ records</li>
+            <li>Built event-driven architecture using Apache Kafka for asynchronous data propagation between services, reducing batch processing delays by 45% and enabling near-real-time data availability</li>
+            <li>Implemented Spring Security with OAuth2 and JWT authentication, enforcing role-based access control and ensuring secure API endpoints in a regulated financial environment</li>
+            <li>Optimized data pipeline performance through SQL query optimization and caching mechanisms, reducing reconciliation processing times by 35% during peak load periods</li>
+            <li>Collaborated with cross-functional teams on system design and troubleshooting, documenting architectural decisions and performing code reviews to maintain high code quality standards</li>
+            <li>Participated in agile ceremonies and delivered features within sprint cycles while maintaining 99.5%+ system uptime for critical data processing workflows</li>
+          </ul>
+          <div class="exp-stack">
+            <span class="stack-tag">Java</span><span class="stack-tag">Spring Boot</span><span class="stack-tag">Apache Kafka</span><span class="stack-tag">PostgreSQL</span><span class="stack-tag">OAuth2</span><span class="stack-tag">JWT</span><span class="stack-tag">REST APIs</span><span class="stack-tag">Microservices</span>
+          </div>
+        </div>
+      </div>
 
     </div>
   </div>
@@ -913,9 +971,67 @@
     <h2 class="section-title">GitHub Projects</h2>
     <div class="projects-grid">
 
+      <!-- ── WORDLE CLONE — featured full-width card ── -->
+      <div class="project-card featured">
+        <div>
+          <div class="live-badge">
+            <span class="live-dot"></span>
+            live · playable
+          </div>
+          <div class="project-card-num">01</div>
+          <div class="project-card-title">Wordle Clone</div>
+          <div class="project-card-desc">
+            I love Wordle — but one word a day isn't enough. Built my own version where you can play as many times as you want. Same green/yellow/grey mechanics, real-time dictionary validation via the Free Dictionary API (no bundled word list), on-screen keyboard for mobile, and a how-to-play modal that shows up automatically for first-time players. Pure vanilla JS, zero backend, hosted on GitHub Pages.
+          </div>
+          <div class="project-card-tags" style="margin-bottom: 1rem;">
+            <span class="project-card-tag">Vanilla JS</span>
+            <span class="project-card-tag">HTML/CSS</span>
+            <span class="project-card-tag">Free Dictionary API</span>
+            <span class="project-card-tag">GitHub Pages</span>
+            <span class="project-card-tag">Mobile-friendly</span>
+          </div>
+          <div class="featured-links">
+            <a class="featured-link primary" href="https://sa1dasari.github.io/wordle_game.github.io/" target="_blank">▶ Play now</a>
+            <a class="featured-link" href="https://github.com/sa1dasari/wordle_game.github.io" target="_blank">↗ GitHub</a>
+          </div>
+        </div>
+        <!-- Mini Wordle tile preview -->
+        <div class="wordle-preview">
+          <div class="wordle-row">
+            <div class="w-tile g">W</div>
+            <div class="w-tile x">O</div>
+            <div class="w-tile x">R</div>
+            <div class="w-tile y">L</div>
+            <div class="w-tile x">D</div>
+          </div>
+          <div class="wordle-row">
+            <div class="w-tile g">W</div>
+            <div class="w-tile g">H</div>
+            <div class="w-tile x">I</div>
+            <div class="w-tile g">L</div>
+            <div class="w-tile x">E</div>
+          </div>
+          <div class="wordle-row">
+            <div class="w-tile g">W</div>
+            <div class="w-tile g">H</div>
+            <div class="w-tile g">E</div>
+            <div class="w-tile g">E</div>
+            <div class="w-tile g">L</div>
+          </div>
+          <div class="wordle-row">
+            <div class="w-tile e"> </div>
+            <div class="w-tile e"> </div>
+            <div class="w-tile e"> </div>
+            <div class="w-tile e"> </div>
+            <div class="w-tile e"> </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- remaining projects renumbered from 02 -->
       <div class="project-card">
         <a class="project-link" href="https://github.com/sa1dasari/fullpicture" target="_blank">↗ github</a>
-        <div class="project-card-num">01</div>
+        <div class="project-card-num">02</div>
         <div class="project-card-title">fullpicture</div>
         <div class="project-card-desc">Android app that uses a floating bubble UI to trigger screen capture and Claude API analysis — surfacing missing context, hidden incentives, and supporting evidence on social media claims. Structured output: Claim → Supported → Missing → Who It Works For → Incentive → Summary.</div>
         <div class="project-card-tags">
@@ -929,7 +1045,7 @@
 
       <div class="project-card">
         <a class="project-link" href="https://github.com/sa1dasari/Personal-Finance-Tracker" target="_blank">↗ github</a>
-        <div class="project-card-num">02</div>
+        <div class="project-card-num">03</div>
         <div class="project-card-title">Personal Finance Tracker</div>
         <div class="project-card-desc">A Java-based personal finance tool integrated with the Claude API — because finance tools should be able to talk back. Tracks expenses, categorizes spending, and uses AI to surface patterns and answer questions about your financial data in plain language.</div>
         <div class="project-card-tags">
@@ -942,7 +1058,7 @@
 
       <div class="project-card">
         <a class="project-link" href="https://github.com/sa1dasari" target="_blank">↗ github</a>
-        <div class="project-card-num">03</div>
+        <div class="project-card-num">04</div>
         <div class="project-card-title">ML Drift Retraining Study</div>
         <div class="project-card-desc">An independent research study exploring drift-triggered retraining policies for streaming ML systems under budget and latency constraints. Investigates when and how to retrigger model training in production environments as data distributions shift over time.</div>
         <div class="project-card-tags">
@@ -953,77 +1069,77 @@
         </div>
       </div>
 
-       <div class="project-card">
-         <a class="project-link" href="https://github.com/sa1dasari/tailoring_resume" target="_blank">↗ github</a>
-         <div class="project-card-num">04</div>
-         <div class="project-card-title">tailoring_resume</div>
-         <div class="project-card-desc">Tooling built to stop sending the same resume to every job. Automates the process of tailoring resume content to specific job descriptions — extracting keywords, matching experience, and generating targeted bullet points. Built for real use during an active job search.</div>
-         <div class="project-card-tags">
-           <span class="project-card-tag">Python</span>
-           <span class="project-card-tag">NLP</span>
-           <span class="project-card-tag">Automation</span>
-           <span class="project-card-tag">AI</span>
-         </div>
-       </div>
-
-       <div class="project-card">
-         <a class="project-link" href="https://github.com/sa1dasari/paper-to-prototype" target="_blank">↗ github</a>
-         <div class="project-card-num">05</div>
-         <div class="project-card-title">paper-to-prototype</div>
-         <div class="project-card-desc">An AI-powered agent that transforms ML research papers into runnable Jupyter notebooks. Drop in a PDF → get back executable PyTorch code with toy datasets and reproduced figures. Features an agentic loop that reads papers, generates notebooks, executes them, handles tracebacks, and iterates up to 5 times until success.</div>
-         <div class="project-card-tags">
-           <span class="project-card-tag">Python</span>
-           <span class="project-card-tag">Claude API</span>
-           <span class="project-card-tag">PyTorch</span>
-           <span class="project-card-tag">Agent Loop</span>
-           <span class="project-card-tag">ML Research</span>
-         </div>
-       </div>
-
-       <div class="project-card">
-         <a class="project-link" href="Fatal Police Shootings Dataset.html" target="_blank">↗ view</a>
-         <div class="project-card-num">06</div>
-         <div class="project-card-title">Fatal Police Shootings Analysis</div>
-         <div class="project-card-desc">Data-driven analysis of 5+ years of fatal police shooting data (2015-2020) investigating racial disparities, demographic patterns, and geographic trends. Applied predictive modeling with -0.780 Pearson correlation coefficient between year and shooting frequency, statistical hypothesis testing with p-value analysis, and multivariate analysis across race, age, and geography dimensions.</div>
-         <div class="project-card-tags">
-           <span class="project-card-tag">Python</span>
-           <span class="project-card-tag">Statistical Analysis</span>
-           <span class="project-card-tag">Machine Learning</span>
-           <span class="project-card-tag">Data Science</span>
-           <span class="project-card-tag">SciPy</span>
-         </div>
-       </div>
-
-       <div class="project-card">
-         <a class="project-link" href="Acccident Detection PRJCT.pptx" target="_blank">↗ slides</a>
-         <div class="project-card-num">07</div>
-         <div class="project-card-title">Automatic Accident Detection System</div>
-         <div class="project-card-desc">Intelligent Object Detection and Tracking System (ODTS) combining Faster R-CNN and YOLO for real-time accident detection in CCTV footage. Achieved 84.79% AP for cars, 71.61% for persons, and 90.85% for fire detection. built unique tracking mechanism assigning IDs to moving objects, enabling accident detection within 10 seconds across vehicle collisions, pedestrian incidents, and fire events.</div>
-         <div class="project-card-tags">
-           <span class="project-card-tag">Python</span>
-           <span class="project-card-tag">Faster R-CNN</span>
-           <span class="project-card-tag">YOLO</span>
-           <span class="project-card-tag">Computer Vision</span>
-           <span class="project-card-tag">OpenCV</span>
-         </div>
-       </div>
-
-        <div class="project-card">
-          <div style="display: flex; gap: 8px; position: absolute; top: 1.5rem; right: 1.5rem;">
-            <a class="project-link" href="https://github.com/sawandasari/Food-Freshness-detector" target="_blank" style="position: static;">↗ github</a>
-            <a class="project-link" href="FFD.pptx" target="_blank" style="position: static;">↗ slides</a>
-          </div>
-          <div class="project-card-num">08</div>
-          <div class="project-card-title">IoT Food Freshness Detection System</div>
-          <div class="project-card-desc">Embedded IoT system integrating Arduino Uno with multi-sensor array (pH, MQ-series gas, moisture sensors) for automated food spoilage detection. HC-05 Bluetooth wireless communication with custom Android app. Sensor fusion with threshold-based classification achieving 85%+ detection accuracy at ~$50 BOM. Detects bacterial contamination preventing foodborne illnesses with <5 second response time.</div>
-          <div class="project-card-tags">
-            <span class="project-card-tag">Arduino</span>
-            <span class="project-card-tag">IoT</span>
-            <span class="project-card-tag">Embedded C/C++</span>
-            <span class="project-card-tag">Android</span>
-            <span class="project-card-tag">Sensor Fusion</span>
-          </div>
+      <div class="project-card">
+        <a class="project-link" href="https://github.com/sa1dasari/tailoring_resume" target="_blank">↗ github</a>
+        <div class="project-card-num">05</div>
+        <div class="project-card-title">tailoring_resume</div>
+        <div class="project-card-desc">Tooling built to stop sending the same resume to every job. Automates the process of tailoring resume content to specific job descriptions — extracting keywords, matching experience, and generating targeted bullet points. Built for real use during an active job search.</div>
+        <div class="project-card-tags">
+          <span class="project-card-tag">Python</span>
+          <span class="project-card-tag">NLP</span>
+          <span class="project-card-tag">Automation</span>
+          <span class="project-card-tag">AI</span>
         </div>
+      </div>
+
+      <div class="project-card">
+        <a class="project-link" href="https://github.com/sa1dasari/paper-to-prototype" target="_blank">↗ github</a>
+        <div class="project-card-num">06</div>
+        <div class="project-card-title">paper-to-prototype</div>
+        <div class="project-card-desc">An AI-powered agent that transforms ML research papers into runnable Jupyter notebooks. Drop in a PDF → get back executable PyTorch code with toy datasets and reproduced figures. Features an agentic loop that reads papers, generates notebooks, executes them, handles tracebacks, and iterates up to 5 times until success.</div>
+        <div class="project-card-tags">
+          <span class="project-card-tag">Python</span>
+          <span class="project-card-tag">Claude API</span>
+          <span class="project-card-tag">PyTorch</span>
+          <span class="project-card-tag">Agent Loop</span>
+          <span class="project-card-tag">ML Research</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <a class="project-link" href="Fatal Police Shootings Dataset.html" target="_blank">↗ view</a>
+        <div class="project-card-num">07</div>
+        <div class="project-card-title">Fatal Police Shootings Analysis</div>
+        <div class="project-card-desc">Data-driven analysis of 5+ years of fatal police shooting data (2015-2020) investigating racial disparities, demographic patterns, and geographic trends. Applied predictive modeling with -0.780 Pearson correlation coefficient between year and shooting frequency, statistical hypothesis testing with p-value analysis, and multivariate analysis across race, age, and geography dimensions.</div>
+        <div class="project-card-tags">
+          <span class="project-card-tag">Python</span>
+          <span class="project-card-tag">Statistical Analysis</span>
+          <span class="project-card-tag">Machine Learning</span>
+          <span class="project-card-tag">Data Science</span>
+          <span class="project-card-tag">SciPy</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <a class="project-link" href="Acccident Detection PRJCT.pptx" target="_blank">↗ slides</a>
+        <div class="project-card-num">08</div>
+        <div class="project-card-title">Automatic Accident Detection System</div>
+        <div class="project-card-desc">Intelligent Object Detection and Tracking System (ODTS) combining Faster R-CNN and YOLO for real-time accident detection in CCTV footage. Achieved 84.79% AP for cars, 71.61% for persons, and 90.85% for fire detection. Built unique tracking mechanism assigning IDs to moving objects, enabling accident detection within 10 seconds across vehicle collisions, pedestrian incidents, and fire events.</div>
+        <div class="project-card-tags">
+          <span class="project-card-tag">Python</span>
+          <span class="project-card-tag">Faster R-CNN</span>
+          <span class="project-card-tag">YOLO</span>
+          <span class="project-card-tag">Computer Vision</span>
+          <span class="project-card-tag">OpenCV</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div style="display: flex; gap: 8px; position: absolute; top: 1.5rem; right: 1.5rem;">
+          <a class="project-link" href="https://github.com/sawandasari/Food-Freshness-detector" target="_blank" style="position: static;">↗ github</a>
+          <a class="project-link" href="FFD.pptx" target="_blank" style="position: static;">↗ slides</a>
+        </div>
+        <div class="project-card-num">09</div>
+        <div class="project-card-title">IoT Food Freshness Detection System</div>
+        <div class="project-card-desc">Embedded IoT system integrating Arduino Uno with multi-sensor array (pH, MQ-series gas, moisture sensors) for automated food spoilage detection. HC-05 Bluetooth wireless communication with custom Android app. Sensor fusion with threshold-based classification achieving 85%+ detection accuracy at ~$50 BOM. Detects bacterial contamination preventing foodborne illnesses with <5 second response time.</div>
+        <div class="project-card-tags">
+          <span class="project-card-tag">Arduino</span>
+          <span class="project-card-tag">IoT</span>
+          <span class="project-card-tag">Embedded C/C++</span>
+          <span class="project-card-tag">Android</span>
+          <span class="project-card-tag">Sensor Fusion</span>
+        </div>
+      </div>
 
     </div>
   </div>
@@ -1053,7 +1169,7 @@
         <div class="edu-year">2017 — 2021</div>
         <div>
           <div class="edu-degree">Bachelor of Technology, Computer Science</div>
-          <div class="edu-school">BV Raju Institue of Technology, Hyderabad, India</div>
+          <div class="edu-school">BV Raju Institute of Technology, Hyderabad, India</div>
           <div class="edu-note">Core computer science curriculum covering data structures, algorithms, operating systems, and software engineering fundamentals. Developed a strong foundation in Java and object-oriented design that carried directly into professional fintech work.</div>
         </div>
       </div>
@@ -1076,132 +1192,60 @@
       <div class="skill-group">
         <div class="skill-group-title">Languages</div>
         <div class="skill-items">
-          <div class="skill-item">
-            <span class="skill-name">Java</span>
-            <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:0.95"></div></div>
-          </div>
-          <div class="skill-item">
-            <span class="skill-name">Python</span>
-            <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:0.75"></div></div>
-          </div>
-          <div class="skill-item">
-            <span class="skill-name">SQL</span>
-            <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:0.80"></div></div>
-          </div>
-          <div class="skill-item">
-            <span class="skill-name">Kotlin (Android)</span>
-            <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:0.55"></div></div>
-          </div>
+          <div class="skill-item"><span class="skill-name">Java</span><div class="skill-bar-track"><div class="skill-bar-fill" style="--w:0.95"></div></div></div>
+          <div class="skill-item"><span class="skill-name">Python</span><div class="skill-bar-track"><div class="skill-bar-fill" style="--w:0.75"></div></div></div>
+          <div class="skill-item"><span class="skill-name">SQL</span><div class="skill-bar-track"><div class="skill-bar-fill" style="--w:0.80"></div></div></div>
+          <div class="skill-item"><span class="skill-name">Kotlin (Android)</span><div class="skill-bar-track"><div class="skill-bar-fill" style="--w:0.55"></div></div></div>
         </div>
       </div>
 
       <div class="skill-group">
         <div class="skill-group-title">Backend & Streaming</div>
         <div class="skill-items">
-          <div class="skill-item">
-            <span class="skill-name">Spring Boot</span>
-            <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:0.92"></div></div>
-          </div>
-          <div class="skill-item">
-            <span class="skill-name">Apache Kafka</span>
-            <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:0.88"></div></div>
-          </div>
-          <div class="skill-item">
-            <span class="skill-name">Apache Flink</span>
-            <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:0.82"></div></div>
-          </div>
-          <div class="skill-item">
-            <span class="skill-name">REST / gRPC</span>
-            <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:0.85"></div></div>
-          </div>
+          <div class="skill-item"><span class="skill-name">Spring Boot</span><div class="skill-bar-track"><div class="skill-bar-fill" style="--w:0.92"></div></div></div>
+          <div class="skill-item"><span class="skill-name">Apache Kafka</span><div class="skill-bar-track"><div class="skill-bar-fill" style="--w:0.88"></div></div></div>
+          <div class="skill-item"><span class="skill-name">Apache Flink</span><div class="skill-bar-track"><div class="skill-bar-fill" style="--w:0.82"></div></div></div>
+          <div class="skill-item"><span class="skill-name">REST / gRPC</span><div class="skill-bar-track"><div class="skill-bar-fill" style="--w:0.85"></div></div></div>
         </div>
       </div>
 
       <div class="skill-group">
         <div class="skill-group-title">Cloud & Infra</div>
         <div class="skill-items">
-          <div class="skill-item">
-            <span class="skill-name">AWS</span>
-            <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:0.85"></div></div>
-          </div>
-          <div class="skill-item">
-            <span class="skill-name">Kubernetes</span>
-            <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:0.80"></div></div>
-          </div>
-          <div class="skill-item">
-            <span class="skill-name">Terraform</span>
-            <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:0.78"></div></div>
-          </div>
-          <div class="skill-item">
-            <span class="skill-name">Docker / CI-CD</span>
-            <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:0.82"></div></div>
-          </div>
+          <div class="skill-item"><span class="skill-name">AWS</span><div class="skill-bar-track"><div class="skill-bar-fill" style="--w:0.85"></div></div></div>
+          <div class="skill-item"><span class="skill-name">Kubernetes</span><div class="skill-bar-track"><div class="skill-bar-fill" style="--w:0.80"></div></div></div>
+          <div class="skill-item"><span class="skill-name">Terraform</span><div class="skill-bar-track"><div class="skill-bar-fill" style="--w:0.78"></div></div></div>
+          <div class="skill-item"><span class="skill-name">Docker / CI-CD</span><div class="skill-bar-track"><div class="skill-bar-fill" style="--w:0.82"></div></div></div>
         </div>
       </div>
 
       <div class="skill-group">
         <div class="skill-group-title">AI / Agents</div>
         <div class="skill-items">
-          <div class="skill-item">
-            <span class="skill-name">Claude API</span>
-            <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:0.85"></div></div>
-          </div>
-          <div class="skill-item">
-            <span class="skill-name">LLM Integration</span>
-            <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:0.78"></div></div>
-          </div>
-          <div class="skill-item">
-            <span class="skill-name">Prompt Engineering</span>
-            <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:0.80"></div></div>
-          </div>
-          <div class="skill-item">
-            <span class="skill-name">Streaming ML</span>
-            <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:0.70"></div></div>
-          </div>
+          <div class="skill-item"><span class="skill-name">Claude API</span><div class="skill-bar-track"><div class="skill-bar-fill" style="--w:0.85"></div></div></div>
+          <div class="skill-item"><span class="skill-name">LLM Integration</span><div class="skill-bar-track"><div class="skill-bar-fill" style="--w:0.78"></div></div></div>
+          <div class="skill-item"><span class="skill-name">Prompt Engineering</span><div class="skill-bar-track"><div class="skill-bar-fill" style="--w:0.80"></div></div></div>
+          <div class="skill-item"><span class="skill-name">Streaming ML</span><div class="skill-bar-track"><div class="skill-bar-fill" style="--w:0.70"></div></div></div>
         </div>
       </div>
 
       <div class="skill-group">
         <div class="skill-group-title">Data & Databases</div>
         <div class="skill-items">
-          <div class="skill-item">
-            <span class="skill-name">PostgreSQL / MySQL</span>
-            <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:0.82"></div></div>
-          </div>
-          <div class="skill-item">
-            <span class="skill-name">Redis</span>
-            <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:0.70"></div></div>
-          </div>
-          <div class="skill-item">
-            <span class="skill-name">AWS S3 / Glue</span>
-            <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:0.75"></div></div>
-          </div>
-          <div class="skill-item">
-            <span class="skill-name">Data Pipelines</span>
-            <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:0.88"></div></div>
-          </div>
+          <div class="skill-item"><span class="skill-name">PostgreSQL / MySQL</span><div class="skill-bar-track"><div class="skill-bar-fill" style="--w:0.82"></div></div></div>
+          <div class="skill-item"><span class="skill-name">Redis</span><div class="skill-bar-track"><div class="skill-bar-fill" style="--w:0.70"></div></div></div>
+          <div class="skill-item"><span class="skill-name">AWS S3 / Glue</span><div class="skill-bar-track"><div class="skill-bar-fill" style="--w:0.75"></div></div></div>
+          <div class="skill-item"><span class="skill-name">Data Pipelines</span><div class="skill-bar-track"><div class="skill-bar-fill" style="--w:0.88"></div></div></div>
         </div>
       </div>
 
       <div class="skill-group">
         <div class="skill-group-title">Practices</div>
         <div class="skill-items">
-          <div class="skill-item">
-            <span class="skill-name">Distributed Systems</span>
-            <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:0.88"></div></div>
-          </div>
-          <div class="skill-item">
-            <span class="skill-name">System Design</span>
-            <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:0.82"></div></div>
-          </div>
-          <div class="skill-item">
-            <span class="skill-name">Compliance / SOC2</span>
-            <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:0.75"></div></div>
-          </div>
-          <div class="skill-item">
-            <span class="skill-name">Agile / Scrum</span>
-            <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:0.85"></div></div>
-          </div>
+          <div class="skill-item"><span class="skill-name">Distributed Systems</span><div class="skill-bar-track"><div class="skill-bar-fill" style="--w:0.88"></div></div></div>
+          <div class="skill-item"><span class="skill-name">System Design</span><div class="skill-bar-track"><div class="skill-bar-fill" style="--w:0.82"></div></div></div>
+          <div class="skill-item"><span class="skill-name">Compliance / SOC2</span><div class="skill-bar-track"><div class="skill-bar-fill" style="--w:0.75"></div></div></div>
+          <div class="skill-item"><span class="skill-name">Agile / Scrum</span><div class="skill-bar-track"><div class="skill-bar-fill" style="--w:0.85"></div></div></div>
         </div>
       </div>
 
@@ -1223,31 +1267,19 @@
     </p>
     <div class="contact-links">
       <a class="contact-link-row" href="https://github.com/sa1dasari" target="_blank">
-        <div>
-          <div class="contact-link-label">GitHub</div>
-          <div class="contact-link-value">github.com/sa1dasari</div>
-        </div>
+        <div><div class="contact-link-label">GitHub</div><div class="contact-link-value">github.com/sa1dasari</div></div>
         <span class="contact-arrow">↗</span>
       </a>
       <a class="contact-link-row" href="https://linkedin.com/in/sawan-dasari" target="_blank">
-        <div>
-          <div class="contact-link-label">LinkedIn</div>
-          <div class="contact-link-value">linkedin.com/in/sawan-dasari</div>
-        </div>
+        <div><div class="contact-link-label">LinkedIn</div><div class="contact-link-value">linkedin.com/in/sawan-dasari</div></div>
         <span class="contact-arrow">↗</span>
       </a>
-      <a class="contact-link-row" href="mailto: sawan.dasari@gmail.com">
-        <div>
-          <div class="contact-link-label">Email</div>
-          <div class="contact-link-value">sawan.dasari@gmail.com</div>
-        </div>
+      <a class="contact-link-row" href="mailto:sawan.dasari@gmail.com">
+        <div><div class="contact-link-label">Email</div><div class="contact-link-value">sawan.dasari@gmail.com</div></div>
         <span class="contact-arrow">↗</span>
       </a>
       <a class="contact-link-row" href="https://sa1dasari.github.io" target="_blank">
-        <div>
-          <div class="contact-link-label">Portfolio</div>
-          <div class="contact-link-value">sa1dasari.github.io</div>
-        </div>
+        <div><div class="contact-link-label">Portfolio</div><div class="contact-link-value">sa1dasari.github.io</div></div>
         <span class="contact-arrow">↗</span>
       </a>
     </div>
@@ -1259,8 +1291,6 @@
 </div>
 
 <script>
-
-  // Page navigation
   function showPage(name) {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
@@ -1268,7 +1298,6 @@
     document.getElementById('nav-' + name).classList.add('active');
     window.scrollTo(0, 0);
 
-    // Animate skill bars when skills page opens
     if (name === 'skills') {
       setTimeout(() => {
         document.querySelectorAll('.skill-bar-fill').forEach(bar => {
@@ -1278,158 +1307,140 @@
     }
   }
 
-   // Reset skill bars when leaving skills page
-   document.querySelectorAll('.nav-links a').forEach(link => {
-     link.addEventListener('click', () => {
-       if (!link.id.includes('skills')) {
-         document.querySelectorAll('.skill-bar-fill').forEach(bar => {
-           bar.style.transform = 'scaleX(0)';
-         });
-       }
-     });
-   });
-
-   // Break apart animation
-   let isShattered = false;
-
-   function createPixelParticles(img, rect) {
-     const canvas = document.createElement('canvas');
-     canvas.width = rect.width;
-     canvas.height = rect.height;
-     const ctx = canvas.getContext('2d');
-
-     const tempImg = new Image();
-     tempImg.crossOrigin = 'anonymous';
-     tempImg.onload = () => {
-       ctx.drawImage(tempImg, 0, 0, rect.width, rect.height);
-       const imageData = ctx.getImageData(0, 0, rect.width, rect.height);
-       const data = imageData.data;
-
-       const pixelSize = 8;
-       const particles = [];
-
-       for (let i = 0; i < rect.width; i += pixelSize) {
-         for (let j = 0; j < rect.height; j += pixelSize) {
-           const idx = (j * rect.width + i) * 4;
-           const alpha = data[idx + 3];
-
-           if (alpha > 128) {
-             const pixel = document.createElement('div');
-             pixel.style.position = 'fixed';
-             pixel.style.left = (rect.left + i) + 'px';
-             pixel.style.top = (rect.top + j) + 'px';
-             pixel.style.width = pixelSize + 'px';
-             pixel.style.height = pixelSize + 'px';
-             pixel.style.backgroundColor = `rgba(${data[idx]}, ${data[idx+1]}, ${data[idx+2]}, ${alpha/255})`;
-             pixel.style.zIndex = '10000';
-             pixel.style.pointerEvents = 'none';
-
-             const delay = Math.random() * 0.5;
-             const duration = 2 + Math.random() * 1.5;
-             const xOffset = (Math.random() - 0.5) * 300;
-
-             pixel.style.animation = `fallApart ${duration}s ease-in ${delay}s forwards`;
-             pixel.style.setProperty('--x-offset', xOffset + 'px');
-
-             document.body.appendChild(pixel);
-           }
-         }
-       }
-     };
-     tempImg.src = img.src;
-   }
-
-    function triggerBreakApart() {
-      if (isShattered) return;
-      isShattered = true;
-
-      const body = document.body;
-      body.style.background = 'var(--bg)';
-
-      const allElements = document.querySelectorAll('body *');
-      const fragment = document.createDocumentFragment();
-      const charWidth = 8; // Approximate average character width
-
-      allElements.forEach(el => {
-        if (el.tagName === 'NAV' || el.tagName === 'SCRIPT' || el.tagName === 'STYLE' || getComputedStyle(el).display === 'none') return;
-        if (el.parentElement && el.parentElement.dataset.isParticle) return;
-
-        const rect = el.getBoundingClientRect();
-        if (rect.width === 0 || rect.height === 0) return;
-
-        // Handle images - create pixel particles
-        if (el.tagName === 'IMG') {
-          createPixelParticles(el, rect);
-          return;
-        }
-
-        // Handle text - break into individual letters
-        const text = el.textContent.trim();
-        if (text.length === 0) return;
-
-        const fontSize = getComputedStyle(el).fontSize;
-        const fontFamily = getComputedStyle(el).fontFamily;
-        const fontWeight = getComputedStyle(el).fontWeight;
-        const color = getComputedStyle(el).color;
-
-        let xPos = rect.left;
-        const yPos = rect.top;
-
-        Array.from(text).forEach((letter, idx) => {
-          const letterSpan = document.createElement('span');
-          letterSpan.textContent = letter;
-          letterSpan.style.position = 'fixed';
-          letterSpan.style.left = xPos + 'px';
-          letterSpan.style.top = yPos + 'px';
-          letterSpan.style.fontSize = fontSize;
-          letterSpan.style.fontFamily = fontFamily;
-          letterSpan.style.fontWeight = fontWeight;
-          letterSpan.style.color = color;
-          letterSpan.style.zIndex = '10000';
-          letterSpan.style.pointerEvents = 'none';
-          letterSpan.style.whiteSpace = 'nowrap';
-          letterSpan.style.display = 'inline-block';
-          letterSpan.dataset.isParticle = true;
-
-          const delay = (idx * 0.02) + (Math.random() * 0.2);
-          const duration = 2 + Math.random() * 1.5;
-          const xOffset = (Math.random() - 0.5) * 400;
-          const rotation = (Math.random() - 0.5) * 720;
-
-          letterSpan.style.animation = `fallApart ${duration}s ease-in ${delay}s forwards`;
-          letterSpan.style.setProperty('--x-offset', xOffset + 'px');
-          letterSpan.style.setProperty('--rotation', rotation + 'deg');
-
-          fragment.appendChild(letterSpan);
-          xPos += charWidth;
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+      if (!link.id.includes('skills')) {
+        document.querySelectorAll('.skill-bar-fill').forEach(bar => {
+          bar.style.transform = 'scaleX(0)';
         });
+      }
+    });
+  });
+
+  let isShattered = false;
+
+  function triggerBreakApart() {
+    if (isShattered) return;
+    isShattered = true;
+
+    const LINE1 = 'I literally said';
+    const LINE2 = 'DO NOT CLICK -_-';
+    const LINE3 = 'refresh to reset';
+
+    const activePage = document.querySelector('.page.active');
+    if (activePage) activePage.style.opacity = '0';
+    document.querySelector('nav').style.opacity = '0';
+
+    const allLetterSpans = [];
+    const seen = new WeakSet();
+
+    document.querySelectorAll('.page.active *').forEach(el => {
+      if (['SCRIPT','STYLE','NAV'].includes(el.tagName)) return;
+      if (seen.has(el)) return;
+      seen.add(el);
+      if (getComputedStyle(el).display === 'none') return;
+
+      const rect = el.getBoundingClientRect();
+      if (rect.width === 0 || rect.height === 0) return;
+
+      const textNodes = Array.from(el.childNodes).filter(n => n.nodeType === Node.TEXT_NODE);
+      if (!textNodes.length) return;
+      const text = textNodes.map(n => n.textContent).join('');
+      if (!text.trim()) return;
+
+      const cs = getComputedStyle(el);
+      const fontSize = cs.fontSize;
+      const charW = parseFloat(fontSize) * 0.58;
+
+      let xPos = rect.left;
+      Array.from(text).forEach(letter => {
+        if (letter === '\n') return;
+        if (letter === ' ') { xPos += charW * 0.5; return; }
+        const span = document.createElement('span');
+        span.textContent = letter;
+        span.style.cssText = `position:fixed;left:${xPos}px;top:${rect.top}px;font-size:${fontSize};font-family:${cs.fontFamily};font-weight:${cs.fontWeight};color:${cs.color};z-index:10000;pointer-events:none;white-space:nowrap;display:inline-block;`;
+        document.body.appendChild(span);
+        allLetterSpans.push({ span, letter: letter.toLowerCase() });
+        xPos += charW;
       });
+    });
 
-      document.body.appendChild(fragment);
+    const pool = {};
+    allLetterSpans.forEach(item => {
+      const k = item.letter;
+      if (!pool[k]) pool[k] = [];
+      pool[k].push(item.span);
+    });
 
-      // Hide original content
-      const activePage = document.querySelector('.page.active');
-      if (activePage) activePage.style.opacity = '0';
-      document.querySelector('nav').style.opacity = '0';
+    const MSG_FONT_SIZE = 17;
+    const MSG_CHAR_W = MSG_FONT_SIZE * 0.62;
+    const MSG_LINE_H = MSG_FONT_SIZE * 2.0;
+    const vCX = window.innerWidth / 2;
+    const vCY = window.innerHeight / 2;
 
-      // Show reset message after animation
-      setTimeout(() => {
-        const resetMsg = document.createElement('div');
-        resetMsg.style.position = 'fixed';
-        resetMsg.style.top = '50%';
-        resetMsg.style.left = '50%';
-        resetMsg.style.transform = 'translate(-50%, -50%)';
-        resetMsg.style.zIndex = '10001';
-        resetMsg.style.color = 'var(--accent)';
-        resetMsg.style.fontFamily = 'var(--font-mono)';
-        resetMsg.style.fontSize = '14px';
-        resetMsg.style.letterSpacing = '0.05em';
-        resetMsg.style.opacity = '0.6';
-        resetMsg.style.textAlign = 'center';
-        resetMsg.innerHTML = '<p style="margin: 0;">I said not to click -_-</p><p style="margin-top: 1rem; opacity: 0.5; font-size: 12px;">Refresh To Reset</p>';
-        document.body.appendChild(resetMsg);
-      }, 3000);
+    function getTarget(lineText, charIdx, lineIdx, totalLines) {
+      const lineW = lineText.length * MSG_CHAR_W;
+      const totalH = totalLines * MSG_LINE_H;
+      const x = vCX - lineW / 2 + charIdx * MSG_CHAR_W;
+      const y = vCY - totalH / 2 + lineIdx * MSG_LINE_H;
+      return { x, y };
     }
+
+    const CATCH_DELAY = 600;
+    const ASSEMBLE_DUR = 950;
+
+    allLetterSpans.forEach(({ span }) => {
+      const xOff = (Math.random() - 0.5) * 500;
+      const rot = (Math.random() - 0.5) * 720;
+      const delay = Math.random() * 500;
+      span.style.transition = `transform 2.5s cubic-bezier(0.4,0,1,1) ${delay}ms,opacity 2.5s ease ${delay}ms`;
+      span.style.transform = `translateY(110vh) translateX(${xOff}px) rotate(${rot}deg)`;
+      span.style.opacity = '0';
+    });
+
+    function catchSpan(span, target, extraDelay, isLine3) {
+      setTimeout(() => {
+        const computedTransform = getComputedStyle(span).transform;
+        span.style.transition = 'none';
+        span.style.transform = computedTransform === 'none' ? '' : computedTransform;
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          const dx = target.x - parseFloat(span.style.left);
+          const dy = target.y - parseFloat(span.style.top);
+          span.style.transition = `transform ${ASSEMBLE_DUR}ms cubic-bezier(0.2,0.8,0.3,1) ${extraDelay}ms,opacity ${ASSEMBLE_DUR}ms ease ${extraDelay}ms,color 400ms ease ${extraDelay}ms,font-size 300ms ease ${extraDelay}ms`;
+          span.style.transform = `${computedTransform === 'none' ? '' : computedTransform} translate(${dx}px,${dy}px) rotate(0deg)`;
+          span.style.opacity = '1';
+          span.style.color = isLine3 ? '#7a7870' : '#c8b97a';
+          span.style.fontSize = MSG_FONT_SIZE + 'px';
+          span.style.fontFamily = "'DM Mono',monospace";
+          span.style.fontWeight = '300';
+          span.style.letterSpacing = '0.08em';
+        }));
+      }, CATCH_DELAY + extraDelay);
+    }
+
+    function processLine(lineText, lineIdx, totalLines, baseDelay) {
+      Array.from(lineText).forEach((char, charIdx) => {
+        if (char === ' ') return;
+        const target = getTarget(lineText, charIdx, lineIdx, totalLines);
+        const key = char.toLowerCase();
+        let span;
+        if (pool[key] && pool[key].length > 0) {
+          span = pool[key].shift();
+          span.style.transition = 'none';
+        } else {
+          span = document.createElement('span');
+          span.textContent = char;
+          span.style.cssText = `position:fixed;left:${Math.random()*window.innerWidth}px;top:${window.innerHeight+50}px;font-size:${MSG_FONT_SIZE}px;font-family:'DM Mono',monospace;font-weight:300;color:#c8b97a;z-index:10000;pointer-events:none;white-space:nowrap;display:inline-block;opacity:0;`;
+          document.body.appendChild(span);
+        }
+        catchSpan(span, target, charIdx * 40 + Math.random() * 80 + baseDelay, lineIdx === 2);
+      });
+    }
+
+    processLine(LINE1, 0, 3, 0);
+    processLine(LINE2, 1, 3, 100);
+    processLine(LINE3, 2, 3, 300);
+  }
 </script>
 </body>
 </html>
