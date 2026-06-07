@@ -555,6 +555,50 @@
     .about-card p { font-size: 14px; color: var(--muted); line-height: 1.8; }
     .about-card p strong { color: var(--text); font-weight: 400; }
 
+    /* Home featured game card */
+    .home-project-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      margin-top: 2rem;
+      background: var(--bg2);
+      border: 1px solid var(--border2);
+      border-radius: 6px;
+      padding: 1.5rem 2rem;
+      flex-wrap: wrap;
+    }
+
+    .home-project-left { flex: 1; min-width: 0; }
+
+    .home-project-title {
+      font-size: 15px;
+      font-weight: 400;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .home-project-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 12px;
+      max-width: 540px;
+    }
+
+    .home-project-modes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .home-project-actions {
+      display: flex;
+      gap: 8px;
+      flex-shrink: 0;
+      flex-wrap: wrap;
+    }
+
     .hobby-list { display: flex; flex-direction: column; gap: 10px; }
 
     .hobby-item {
@@ -750,7 +794,30 @@
         </div>
       </div>
     </div>
+
+    <!-- Featured project on home -->
+    <div class="home-project-card">
+      <div class="home-project-left">
+        <div class="live-badge" style="margin-bottom: 0.6rem;">
+          <span class="live-dot"></span>
+          live · playable
+        </div>
+        <div class="home-project-title">Wordle Game Suite</div>
+        <div class="home-project-desc">Four modes: unlimited Solo, real-time 1v1 Duel, shareable Challenge links, and a multiplayer Party room with chat and letter reveals.</div>
+        <div class="home-project-modes">
+          <span class="mode-pill solo">Solo</span>
+          <span class="mode-pill duel">⚔️ Duel</span>
+          <span class="mode-pill chal">🎯 Challenge</span>
+          <span class="mode-pill party">🎉 Party</span>
+        </div>
+      </div>
+      <div class="home-project-actions">
+        <a class="btn btn-primary" href="https://sa1dasari.github.io/wordle_game.github.io/" target="_blank" style="font-size:11px;">▶ Play now</a>
+        <a class="btn btn-ghost" onclick="showPage('projects')" style="font-size:11px;">↗ All projects</a>
+      </div>
+    </div>
   </div>
+
   <footer>
     <p>sa1dasari.github.io</p>
     <p style="cursor: pointer;" onclick="triggerBreakApart()">DO NOT CLICK HERE</p>
