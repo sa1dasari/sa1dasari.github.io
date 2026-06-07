@@ -34,7 +34,6 @@
       min-height: 100vh;
     }
 
-    /* NAV */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -80,7 +79,6 @@
     .nav-links a:hover, .nav-links a.active { color: var(--text); }
     .nav-links a.active { color: var(--accent); }
 
-    /* PAGES */
     .page {
       display: none;
       min-height: 100vh;
@@ -88,7 +86,6 @@
     }
     .page.active { display: block; }
 
-    /* HERO */
     .hero {
       display: grid;
       grid-template-columns: 1fr 340px;
@@ -165,22 +162,11 @@
       border: none;
     }
 
-    .btn-primary {
-      background: var(--accent);
-      color: #0e0e0f;
-    }
-
+    .btn-primary { background: var(--accent); color: #0e0e0f; }
     .btn-primary:hover { background: #d4c68a; }
-
-    .btn-ghost {
-      background: transparent;
-      color: var(--muted);
-      border: 1px solid var(--border2);
-    }
-
+    .btn-ghost { background: transparent; color: var(--muted); border: 1px solid var(--border2); }
     .btn-ghost:hover { color: var(--text); border-color: var(--border2); background: var(--bg3); }
 
-    /* PHOTO */
     .hero-photo {
       display: flex;
       justify-content: center;
@@ -202,41 +188,8 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      /* FIX: position image so the full face + body is centered — not cropped at top */
       object-position: center 15%;
       display: block;
-    }
-
-    .photo-placeholder {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      color: var(--muted);
-    }
-
-    .photo-placeholder-icon {
-      width: 64px;
-      height: 64px;
-      border-radius: 50%;
-      background: var(--bg2);
-      border: 1px solid var(--border2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 26px;
-      color: var(--accent);
-      font-family: var(--font-mono);
-      font-weight: 300;
-    }
-
-    .photo-placeholder span {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      letter-spacing: 0.08em;
     }
 
     .photo-accent {
@@ -249,15 +202,6 @@
       pointer-events: none;
     }
 
-    /* DIVIDER */
-    .divider {
-      max-width: 1100px;
-      margin: 0 auto 4rem;
-      padding: 0 2.5rem;
-      border-top: 1px solid var(--border);
-    }
-
-    /* SECTION */
     .section {
       max-width: 1100px;
       margin: 0 auto;
@@ -281,7 +225,6 @@
       color: var(--text);
     }
 
-    /* QUICK STATS on home */
     .stats-row {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -293,10 +236,7 @@
       margin-bottom: 4rem;
     }
 
-    .stat-cell {
-      background: var(--bg2);
-      padding: 1.5rem;
-    }
+    .stat-cell { background: var(--bg2); padding: 1.5rem; }
 
     .stat-num {
       font-size: 2rem;
@@ -314,7 +254,6 @@
       font-family: var(--font-mono);
     }
 
-    /* EXPERIENCE */
     .exp-list { display: flex; flex-direction: column; gap: 0; }
 
     .exp-item {
@@ -326,7 +265,6 @@
     }
 
     .exp-item:last-child { border-bottom: 1px solid var(--border); }
-
     .exp-meta { padding-top: 2px; }
 
     .exp-period {
@@ -344,36 +282,13 @@
       letter-spacing: 0.02em;
     }
 
-    .exp-role {
-      font-size: 16px;
-      font-weight: 400;
-      color: var(--text);
-      margin-bottom: 4px;
-    }
-
-    .exp-company {
-      font-family: var(--font-mono);
-      font-size: 12px;
-      color: var(--accent);
-      margin-bottom: 1rem;
-      letter-spacing: 0.03em;
-    }
-
-    .exp-desc {
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.75;
-    }
-
+    .exp-role { font-size: 16px; font-weight: 400; color: var(--text); margin-bottom: 4px; }
+    .exp-company { font-family: var(--font-mono); font-size: 12px; color: var(--accent); margin-bottom: 1rem; letter-spacing: 0.03em; }
+    .exp-desc { color: var(--muted); font-size: 14px; line-height: 1.75; }
     .exp-desc li { margin-bottom: 6px; margin-left: 1.2rem; }
     .exp-desc li::marker { color: var(--accent); }
 
-    .exp-stack {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 1rem;
-    }
+    .exp-stack { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 1rem; }
 
     .stack-tag {
       font-family: var(--font-mono);
@@ -384,7 +299,6 @@
       color: var(--muted);
     }
 
-    /* PROJECTS */
     .projects-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -414,9 +328,7 @@
       align-items: start;
     }
 
-    .project-card.featured .project-card-desc {
-      max-width: 680px;
-    }
+    .project-card.featured .project-card-desc { max-width: 680px; }
 
     .live-badge {
       display: inline-flex;
@@ -445,6 +357,29 @@
       50% { opacity: 0.4; transform: scale(0.8); }
     }
 
+    /* Mode pills */
+    .mode-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 1rem;
+    }
+
+    .mode-pill {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      padding: 3px 10px;
+      border-radius: 20px;
+      border: 1px solid var(--border2);
+      color: var(--muted);
+      letter-spacing: 0.04em;
+    }
+
+    .mode-pill.solo   { border-color: #6aaa64; color: #6aaa64; }
+    .mode-pill.duel   { border-color: #c8b97a; color: #c8b97a; }
+    .mode-pill.chal   { border-color: #7a9ec8; color: #7a9ec8; }
+    .mode-pill.party  { border-color: #b59f3b; color: #b59f3b; }
+
     .wordle-preview {
       display: flex;
       flex-direction: column;
@@ -453,10 +388,7 @@
       opacity: 0.85;
     }
 
-    .wordle-row {
-      display: flex;
-      gap: 4px;
-    }
+    .wordle-row { display: flex; gap: 4px; }
 
     .w-tile {
       width: 28px;
@@ -485,25 +417,10 @@
       letter-spacing: 0.08em;
     }
 
-    .project-card-title {
-      font-size: 16px;
-      font-weight: 400;
-      color: var(--text);
-      margin-bottom: 8px;
-    }
+    .project-card-title { font-size: 16px; font-weight: 400; color: var(--text); margin-bottom: 8px; }
+    .project-card-desc { font-size: 13px; color: var(--muted); line-height: 1.7; margin-bottom: 1rem; }
 
-    .project-card-desc {
-      font-size: 13px;
-      color: var(--muted);
-      line-height: 1.7;
-      margin-bottom: 1rem;
-    }
-
-    .project-card-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
+    .project-card-tags { display: flex; flex-wrap: wrap; gap: 6px; }
 
     .project-card-tag {
       font-family: var(--font-mono);
@@ -552,7 +469,6 @@
     .featured-link.primary { color: var(--accent2); border-color: var(--accent2); }
     .featured-link.primary:hover { background: rgba(143,168,143,0.1); }
 
-    /* EDUCATION */
     .edu-list { display: flex; flex-direction: column; gap: 0; }
 
     .edu-item {
@@ -564,35 +480,11 @@
     }
 
     .edu-item:last-child { border-bottom: 1px solid var(--border); }
+    .edu-year { font-family: var(--font-mono); font-size: 11px; color: var(--muted); padding-top: 2px; }
+    .edu-degree { font-size: 16px; font-weight: 400; color: var(--text); margin-bottom: 4px; }
+    .edu-school { font-family: var(--font-mono); font-size: 12px; color: var(--accent); margin-bottom: 8px; letter-spacing: 0.03em; }
+    .edu-note { font-size: 13px; color: var(--muted); }
 
-    .edu-year {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      color: var(--muted);
-      padding-top: 2px;
-    }
-
-    .edu-degree {
-      font-size: 16px;
-      font-weight: 400;
-      color: var(--text);
-      margin-bottom: 4px;
-    }
-
-    .edu-school {
-      font-family: var(--font-mono);
-      font-size: 12px;
-      color: var(--accent);
-      margin-bottom: 8px;
-      letter-spacing: 0.03em;
-    }
-
-    .edu-note {
-      font-size: 13px;
-      color: var(--muted);
-    }
-
-    /* SKILLS PAGE */
     .skills-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -604,10 +496,7 @@
       margin-bottom: 3rem;
     }
 
-    .skill-group {
-      background: var(--bg2);
-      padding: 1.75rem;
-    }
+    .skill-group { background: var(--bg2); padding: 1.75rem; }
 
     .skill-group-title {
       font-family: var(--font-mono);
@@ -620,13 +509,7 @@
 
     .skill-items { display: flex; flex-direction: column; gap: 10px; }
 
-    .skill-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-    }
-
+    .skill-item { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
     .skill-name { font-size: 13px; color: var(--text); }
 
     .skill-bar-track {
@@ -646,9 +529,6 @@
       transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    .skill-bar-fill.animated { transform: scaleX(1); }
-
-    /* ABOUT / HOBBIES */
     .about-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -675,12 +555,7 @@
     .about-card p { font-size: 14px; color: var(--muted); line-height: 1.8; }
     .about-card p strong { color: var(--text); font-weight: 400; }
 
-    /* Hobbies list */
-    .hobby-list {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
+    .hobby-list { display: flex; flex-direction: column; gap: 10px; }
 
     .hobby-item {
       display: flex;
@@ -691,18 +566,9 @@
       line-height: 1.5;
     }
 
-    .hobby-icon {
-      font-size: 15px;
-      flex-shrink: 0;
-      width: 20px;
-      text-align: center;
-      margin-top: 1px;
-    }
-
     .hobby-item strong { color: var(--text); font-weight: 400; }
     .hobby-item span { color: var(--muted); }
 
-    /* CONTACT */
     .contact-links {
       display: flex;
       flex-direction: column;
@@ -739,7 +605,6 @@
     .contact-link-value { font-size: 15px; color: var(--text); }
     .contact-arrow { color: var(--accent); font-size: 18px; }
 
-    /* FOOTER */
     footer {
       border-top: 1px solid var(--border);
       padding: 2rem 2.5rem;
@@ -757,7 +622,6 @@
       letter-spacing: 0.04em;
     }
 
-    /* ANIMATIONS */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(18px); }
       to { opacity: 1; transform: translateY(0); }
@@ -770,24 +634,11 @@
     .delay-4 { animation-delay: 0.4s; }
     .delay-5 { animation-delay: 0.5s; }
 
-    .typed-text::after {
-      content: '|';
-      animation: blink 1s step-end infinite;
-      color: var(--accent);
-      margin-left: 2px;
-    }
-
     @keyframes blink {
       0%, 100% { opacity: 1; }
       50% { opacity: 0; }
     }
 
-    @keyframes fallApart {
-      0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 1; }
-      100% { transform: translateY(100vh) translateX(var(--x-offset)) rotate(var(--rotation, 360deg)); opacity: 0; }
-    }
-
-    /* MOBILE */
     @media (max-width: 768px) {
       .hero { grid-template-columns: 1fr; padding: 4rem 1.5rem 3rem; }
       .hero-photo { order: -1; }
@@ -1014,6 +865,7 @@
     <h2 class="section-title">GitHub Projects</h2>
     <div class="projects-grid">
 
+      <!-- ── WORDLE GAME SUITE — featured ── -->
       <div class="project-card featured">
         <div>
           <div class="live-badge">
@@ -1021,22 +873,36 @@
             live · playable
           </div>
           <div class="project-card-num">01</div>
-          <div class="project-card-title">Wordle Clone</div>
-          <div class="project-card-desc">
-            I love Wordle — but one word a day isn't enough. Built my own version where you can play as many times as you want. Same green/yellow/grey mechanics, real-time dictionary validation via the Free Dictionary API (no bundled word list), on-screen keyboard for mobile, and a how-to-play modal that shows up automatically for first-time players. Pure vanilla JS, zero backend, hosted on GitHub Pages.
+          <div class="project-card-title">Wordle Game Suite</div>
+
+          <!-- mode pills -->
+          <div class="mode-pills">
+            <span class="mode-pill solo">Solo</span>
+            <span class="mode-pill duel">⚔️ Duel</span>
+            <span class="mode-pill chal">🎯 Challenge</span>
+            <span class="mode-pill party">🎉 Party</span>
           </div>
-          <div class="project-card-tags" style="margin-bottom: 1rem;">
+
+          <div class="project-card-desc">
+            Took the classic Wordle format and extended it into a full multiplayer suite. <strong style="color:var(--text);font-weight:400;">Solo</strong> gives you unlimited games with real-time dictionary validation via the Free Dictionary API — no bundled word list. <strong style="color:var(--text);font-weight:400;">Duel</strong> is a real-time 1v1 mode where both players race on the same word, backed by a Node.js/Socket.io server. <strong style="color:var(--text);font-weight:400;">Challenge</strong> lets you set a word, generate a shareable link, and send friends in to guess — works for multiple people off the same link. <strong style="color:var(--text);font-weight:400;">Party</strong> is a full multiplayer room with configurable word length, round timers, periodic letter reveals, a rotating setter role, scoreboard, and live chat.
+          </div>
+          <div class="project-card-tags" style="margin-bottom: 0;">
             <span class="project-card-tag">Vanilla JS</span>
-            <span class="project-card-tag">HTML/CSS</span>
+            <span class="project-card-tag">Node.js</span>
+            <span class="project-card-tag">Socket.io</span>
             <span class="project-card-tag">Free Dictionary API</span>
             <span class="project-card-tag">GitHub Pages</span>
-            <span class="project-card-tag">Mobile-friendly</span>
+            <span class="project-card-tag">Railway</span>
           </div>
           <div class="featured-links">
-            <a class="featured-link primary" href="https://sa1dasari.github.io/wordle_game.github.io/" target="_blank">▶ Play now</a>
+            <a class="featured-link primary" href="https://sa1dasari.github.io/wordle_game.github.io/" target="_blank">▶ Play Solo</a>
+            <a class="featured-link" href="https://sa1dasari.github.io/wordle_game.github.io/duel.html" target="_blank">⚔️ Duel</a>
+            <a class="featured-link" href="https://sa1dasari.github.io/wordle_game.github.io/challenge.html" target="_blank">🎯 Challenge</a>
+            <a class="featured-link" href="https://sa1dasari.github.io/wordle_game.github.io/party.html" target="_blank">🎉 Party</a>
             <a class="featured-link" href="https://github.com/sa1dasari/wordle_game.github.io" target="_blank">↗ GitHub</a>
           </div>
         </div>
+        <!-- Mini Wordle tile preview -->
         <div class="wordle-preview">
           <div class="wordle-row">
             <div class="w-tile g">W</div>
