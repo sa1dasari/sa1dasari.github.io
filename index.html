@@ -733,6 +733,7 @@
       <div class="hero-actions fade-up delay-4">
         <a class="btn btn-primary" onclick="showPage('projects')">View Projects</a>
         <a class="btn btn-ghost" href="https://github.com/sa1dasari" target="_blank">GitHub</a>
+        <a class="btn btn-ghost" href="https://linkedin.com/in/sawan-dasari" target="_blank">LinkedIn</a>
         <a class="btn btn-ghost" onclick="showPage('contact')">Get in touch</a>
       </div>
     </div>
@@ -1238,23 +1239,28 @@
     <p style="color: var(--muted); margin-bottom: 2.5rem; max-width: 500px; font-size: 15px; line-height: 1.8;">
       Open to new opportunities, interesting conversations, and side project collabs. H1B transfer welcome — based in NYC, open to relocation.
     </p>
-    <div class="contact-links">
-      <a class="contact-link-row" href="https://github.com/sa1dasari" target="_blank">
-        <div><div class="contact-link-label">GitHub</div><div class="contact-link-value">github.com/sa1dasari</div></div>
-        <span class="contact-arrow">↗</span>
-      </a>
-      <a class="contact-link-row" href="https://linkedin.com/in/sawan-dasari" target="_blank">
-        <div><div class="contact-link-label">LinkedIn</div><div class="contact-link-value">linkedin.com/in/sawan-dasari</div></div>
-        <span class="contact-arrow">↗</span>
-      </a>
-      <a class="contact-link-row" href="mailto:sawan.dasari@gmail.com">
-        <div><div class="contact-link-label">Email</div><div class="contact-link-value">sawan.dasari@gmail.com</div></div>
-        <span class="contact-arrow">↗</span>
-      </a>
-      <a class="contact-link-row" href="https://sa1dasari.github.io" target="_blank">
-        <div><div class="contact-link-label">Portfolio</div><div class="contact-link-value">sa1dasari.github.io</div></div>
-        <span class="contact-arrow">↗</span>
-      </a>
+    <div style="display: flex; gap: 3rem; align-items: flex-start; flex-wrap: wrap;">
+      <div class="contact-links">
+        <a class="contact-link-row" href="https://github.com/sa1dasari" target="_blank">
+          <div><div class="contact-link-label">GitHub</div><div class="contact-link-value">github.com/sa1dasari</div></div>
+          <span class="contact-arrow">↗</span>
+        </a>
+        <a class="contact-link-row" href="https://linkedin.com/in/sawan-dasari" target="_blank">
+          <div><div class="contact-link-label">LinkedIn</div><div class="contact-link-value">linkedin.com/in/sawan-dasari</div></div>
+          <span class="contact-arrow">↗</span>
+        </a>
+        <a class="contact-link-row" href="mailto:sawan.dasari@gmail.com">
+          <div><div class="contact-link-label">Email</div><div class="contact-link-value">sawan.dasari@gmail.com</div></div>
+          <span class="contact-arrow">↗</span>
+        </a>
+        <a class="contact-link-row" href="https://sa1dasari.github.io" target="_blank">
+          <div><div class="contact-link-label">Portfolio</div><div class="contact-link-value">sa1dasari.github.io</div></div>
+          <span class="contact-arrow">↗</span>
+        </a>
+      </div>
+      <div class="badge-base LI-profile-badge" data-locale="en_US" data-size="medium" data-theme="dark" data-type="VERTICAL" data-vanity="sawan-dasari" data-version="v1">
+        <a class="badge-base__link LI-simple-link" href="https://www.linkedin.com/in/sawan-dasari?trk=profile-badge">Sawan Dasari</a>
+      </div>
     </div>
   </div>
   <footer>
@@ -1262,6 +1268,8 @@
     <p>Hyderabad → Cincinnati → Boston → NYC</p>
   </footer>
 </div>
+
+<script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script>
 
 <script>
   function showPage(name) {
@@ -1296,14 +1304,13 @@
     if (isShattered) return;
     isShattered = true;
 
-    const LINE1 = 'I literally said';
-    const LINE2 = 'DO NOT CLICK -_-';
-    const LINE3 = 'refresh to reset';
+    // Use shorter lines so they fit on mobile in one line
+    const isMobile = window.innerWidth < 480;
+    const LINE1 = isMobile ? 'I said' : 'I literally said';
+    const LINE2 = isMobile ? 'DO NOT CLICK' : 'DO NOT CLICK -_-';
+    const LINE3 = isMobile ? 'refresh 2 reset' : 'refresh to reset';
 
-    const activePage = document.querySelector('.page.active');
-    if (activePage) activePage.style.opacity = '0';
-    document.querySelector('nav').style.opacity = '0';
-
+    // IMPORTANT: capture positions BEFORE fading the page out
     const allLetterSpans = [];
     const seen = new WeakSet();
 
@@ -1338,6 +1345,11 @@
       });
     });
 
+    // Now fade out the page AFTER positions are captured
+    const activePage = document.querySelector('.page.active');
+    if (activePage) activePage.style.opacity = '0';
+    document.querySelector('nav').style.opacity = '0';
+
     const pool = {};
     allLetterSpans.forEach(item => {
       const k = item.letter;
@@ -1345,7 +1357,7 @@
       pool[k].push(item.span);
     });
 
-    const MSG_FONT_SIZE = 17;
+    const MSG_FONT_SIZE = window.innerWidth < 480 ? 13 : 17;
     const MSG_CHAR_W = MSG_FONT_SIZE * 0.62;
     const MSG_LINE_H = MSG_FONT_SIZE * 2.0;
     const vCX = window.innerWidth / 2;
