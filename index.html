@@ -1304,127 +1304,164 @@
     if (isShattered) return;
     isShattered = true;
 
-    // Use shorter lines so they fit on mobile in one line
     const isMobile = window.innerWidth < 480;
-    const LINE1 = isMobile ? 'I said' : 'I literally said';
-    const LINE2 = isMobile ? 'DO NOT CLICK' : 'DO NOT CLICK -_-';
-    const LINE3 = isMobile ? 'refresh 2 reset' : 'refresh to reset';
+    const MSG_FONT_SIZE = isMobile ? 12 : 17;
+    const LINE1 = 'I literally said';
+    const LINE2 = 'DO NOT CLICK -_-';
+    const LINE3 = 'refresh to reset';
 
-    // IMPORTANT: capture positions BEFORE fading the page out
+    // Step 1: Snapshot ALL visible text as fixed spans BEFORE hiding anything
     const allLetterSpans = [];
     const seen = new WeakSet();
 
-    document.querySelectorAll('.page.active *').forEach(el => {
-      if (['SCRIPT','STYLE','NAV'].includes(el.tagName)) return;
+    document.querySelectorAll('#page-home *').forEach(el => {
+      if (['SCRIPT','STYLE'].includes(el.tagName)) return;
       if (seen.has(el)) return;
       seen.add(el);
-      if (getComputedStyle(el).display === 'none') return;
-
-      const rect = el.getBoundingClientRect();
-      if (rect.width === 0 || rect.height === 0) return;
-
-      const textNodes = Array.from(el.childNodes).filter(n => n.nodeType === Node.TEXT_NODE);
-      if (!textNodes.length) return;
-      const text = textNodes.map(n => n.textContent).join('');
-      if (!text.trim()) return;
 
       const cs = getComputedStyle(el);
-      const fontSize = cs.fontSize;
-      const charW = parseFloat(fontSize) * 0.58;
+      if (cs.display === 'none' || cs.visibility === 'hidden' || parseFloat(cs.opacity) === 0) return;
 
-      let xPos = rect.left;
-      Array.from(text).forEach(letter => {
-        if (letter === '\n') return;
-        if (letter === ' ') { xPos += charW * 0.5; return; }
-        const span = document.createElement('span');
-        span.textContent = letter;
-        span.style.cssText = `position:fixed;left:${xPos}px;top:${rect.top}px;font-size:${fontSize};font-family:${cs.fontFamily};font-weight:${cs.fontWeight};color:${cs.color};z-index:10000;pointer-events:none;white-space:nowrap;display:inline-block;`;
-        document.body.appendChild(span);
-        allLetterSpans.push({ span, letter: letter.toLowerCase() });
-        xPos += charW;
+      const rect = el.getBoundingClientRect();
+      if (rect.width < 1 || rect.height < 1) return;
+
+      const textNodes = Array.from(el.childNodes).filter(n => n.nodeType === Node.TEXT_NODE && n.textContent.trim());
+      if (!textNodes.length) return;
+
+      const fontSize = cs.fontSize;
+      const charW = parseFloat(fontSize) * 0.55;
+
+      textNodes.forEach(tn => {
+        const text = tn.textContent;
+        // Get rough x position of this text node
+        let xPos = rect.left;
+        Array.from(text).forEach(letter => {
+          if (letter === '\n') return;
+          if (letter === ' ') { xPos += charW * 0.5; return; }
+          const span = document.createElement('span');
+          span.textContent = letter;
+          span.style.cssText = [
+            'position:fixed',
+            `left:${xPos}px`,
+            `top:${rect.top}px`,
+            `font-size:${fontSize}`,
+            `font-family:${cs.fontFamily}`,
+            `font-weight:${cs.fontWeight}`,
+            `color:${cs.color}`,
+            'z-index:10000',
+            'pointer-events:none',
+            'white-space:nowrap',
+            'display:inline-block',
+            'will-change:transform'
+          ].join(';');
+          document.body.appendChild(span);
+          allLetterSpans.push({ span, lx: xPos, ly: rect.top, letter: letter.toLowerCase() });
+          xPos += charW;
+        });
       });
     });
 
-    // Now fade out the page AFTER positions are captured
-    const activePage = document.querySelector('.page.active');
-    if (activePage) activePage.style.opacity = '0';
+    // Step 2: NOW hide the page
+    document.getElementById('page-home').style.opacity = '0';
     document.querySelector('nav').style.opacity = '0';
 
+    // Step 3: Build pool from captured spans
     const pool = {};
-    allLetterSpans.forEach(item => {
-      const k = item.letter;
-      if (!pool[k]) pool[k] = [];
-      pool[k].push(item.span);
+    allLetterSpans.forEach(({ span, letter }) => {
+      if (!pool[letter]) pool[letter] = [];
+      pool[letter].push(span);
     });
 
-    const MSG_FONT_SIZE = window.innerWidth < 480 ? 13 : 17;
+    // Step 4: Scatter all spans off screen
+    requestAnimationFrame(() => {
+      allLetterSpans.forEach(({ span }) => {
+        const xOff = (Math.random() - 0.5) * Math.max(window.innerWidth, 600);
+        const rot = (Math.random() - 0.5) * 720;
+        const delay = Math.random() * 400;
+        span.style.transition = `transform 1.8s cubic-bezier(0.4,0,1,1) ${delay}ms, opacity 1.8s ease ${delay}ms`;
+        span.style.transform = `translateY(110vh) translateX(${xOff}px) rotate(${rot}deg)`;
+        span.style.opacity = '0';
+      });
+    });
+
+    // Step 5: Reassemble message letters from pool
     const MSG_CHAR_W = MSG_FONT_SIZE * 0.62;
-    const MSG_LINE_H = MSG_FONT_SIZE * 2.0;
-    const vCX = window.innerWidth / 2;
-    const vCY = window.innerHeight / 2;
+    const MSG_LINE_H = MSG_FONT_SIZE * 2.2;
+    const lines = [LINE1, LINE2, LINE3];
+    const totalH = lines.length * MSG_LINE_H;
+    const CX = window.innerWidth / 2;
+    const CY = window.innerHeight / 2;
 
-    function getTarget(lineText, charIdx, lineIdx, totalLines) {
+    const SCATTER_WAIT = 800;
+    const ASSEMBLE_DUR = 900;
+
+    lines.forEach((lineText, lineIdx) => {
       const lineW = lineText.length * MSG_CHAR_W;
-      const totalH = totalLines * MSG_LINE_H;
-      const x = vCX - lineW / 2 + charIdx * MSG_CHAR_W;
-      const y = vCY - totalH / 2 + lineIdx * MSG_LINE_H;
-      return { x, y };
-    }
+      const targetY = CY - totalH / 2 + lineIdx * MSG_LINE_H;
 
-    const CATCH_DELAY = 600;
-    const ASSEMBLE_DUR = 950;
-
-    allLetterSpans.forEach(({ span }) => {
-      const xOff = (Math.random() - 0.5) * 500;
-      const rot = (Math.random() - 0.5) * 720;
-      const delay = Math.random() * 500;
-      span.style.transition = `transform 2.5s cubic-bezier(0.4,0,1,1) ${delay}ms,opacity 2.5s ease ${delay}ms`;
-      span.style.transform = `translateY(110vh) translateX(${xOff}px) rotate(${rot}deg)`;
-      span.style.opacity = '0';
-    });
-
-    function catchSpan(span, target, extraDelay, isLine3) {
-      setTimeout(() => {
-        const computedTransform = getComputedStyle(span).transform;
-        span.style.transition = 'none';
-        span.style.transform = computedTransform === 'none' ? '' : computedTransform;
-        requestAnimationFrame(() => requestAnimationFrame(() => {
-          const dx = target.x - parseFloat(span.style.left);
-          const dy = target.y - parseFloat(span.style.top);
-          span.style.transition = `transform ${ASSEMBLE_DUR}ms cubic-bezier(0.2,0.8,0.3,1) ${extraDelay}ms,opacity ${ASSEMBLE_DUR}ms ease ${extraDelay}ms,color 400ms ease ${extraDelay}ms,font-size 300ms ease ${extraDelay}ms`;
-          span.style.transform = `${computedTransform === 'none' ? '' : computedTransform} translate(${dx}px,${dy}px) rotate(0deg)`;
-          span.style.opacity = '1';
-          span.style.color = isLine3 ? '#7a7870' : '#c8b97a';
-          span.style.fontSize = MSG_FONT_SIZE + 'px';
-          span.style.fontFamily = "'DM Mono',monospace";
-          span.style.fontWeight = '300';
-          span.style.letterSpacing = '0.08em';
-        }));
-      }, CATCH_DELAY + extraDelay);
-    }
-
-    function processLine(lineText, lineIdx, totalLines, baseDelay) {
       Array.from(lineText).forEach((char, charIdx) => {
         if (char === ' ') return;
-        const target = getTarget(lineText, charIdx, lineIdx, totalLines);
+        const targetX = CX - lineW / 2 + charIdx * MSG_CHAR_W;
         const key = char.toLowerCase();
+        const extraDelay = charIdx * 35 + lineIdx * 80 + Math.random() * 60;
+
         let span;
         if (pool[key] && pool[key].length > 0) {
           span = pool[key].shift();
-          span.style.transition = 'none';
         } else {
+          // Create a new span if pool is empty for this letter
           span = document.createElement('span');
           span.textContent = char;
-          span.style.cssText = `position:fixed;left:${Math.random()*window.innerWidth}px;top:${window.innerHeight+50}px;font-size:${MSG_FONT_SIZE}px;font-family:'DM Mono',monospace;font-weight:300;color:#c8b97a;z-index:10000;pointer-events:none;white-space:nowrap;display:inline-block;opacity:0;`;
+          span.style.cssText = [
+            'position:fixed',
+            `left:${Math.random() * window.innerWidth}px`,
+            `top:${window.innerHeight + 20}px`,
+            `font-size:${MSG_FONT_SIZE}px`,
+            "font-family:'DM Mono',monospace",
+            'font-weight:300',
+            'color:#c8b97a',
+            'z-index:10000',
+            'pointer-events:none',
+            'white-space:nowrap',
+            'display:inline-block',
+            'opacity:0',
+            'will-change:transform'
+          ].join(';');
           document.body.appendChild(span);
         }
-        catchSpan(span, target, charIdx * 40 + Math.random() * 80 + baseDelay, lineIdx === 2);
-      });
-    }
 
-    processLine(LINE1, 0, 3, 0);
-    processLine(LINE2, 1, 3, 100);
-    processLine(LINE3, 2, 3, 300);
+        const fromX = parseFloat(span.style.left) || 0;
+        const fromY = parseFloat(span.style.top) || 0;
+
+        setTimeout(() => {
+          // Reset any previous transform
+          span.style.transition = 'none';
+          span.style.transform = '';
+
+          const currentLeft = parseFloat(span.style.left) || fromX;
+          const currentTop = parseFloat(span.style.top) || fromY;
+          const dx = targetX - currentLeft;
+          const dy = targetY - currentTop;
+
+          requestAnimationFrame(() => requestAnimationFrame(() => {
+            const isLine3 = lineIdx === 2;
+            span.style.transition = [
+              `transform ${ASSEMBLE_DUR}ms cubic-bezier(0.2,0.8,0.3,1)`,
+              `opacity ${ASSEMBLE_DUR}ms ease`,
+              `color 300ms ease`,
+              `font-size 200ms ease`
+            ].join(', ');
+            span.style.transform = `translate(${dx}px, ${dy}px) rotate(0deg)`;
+            span.style.opacity = '1';
+            span.style.color = isLine3 ? '#7a7870' : '#c8b97a';
+            span.style.fontSize = MSG_FONT_SIZE + 'px';
+            span.style.fontFamily = "'DM Mono',monospace";
+            span.style.fontWeight = '300';
+            span.style.letterSpacing = '0.08em';
+          }));
+        }, SCATTER_WAIT + extraDelay);
+      });
+    });
   }
 </script>
 </body>
