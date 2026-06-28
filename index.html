@@ -376,9 +376,12 @@
     }
 
     .mode-pill.solo   { border-color: #6aaa64; color: #6aaa64; }
+    .mode-pill.daily  { border-color: #8fa88f; color: #8fa88f; }
     .mode-pill.duel   { border-color: #c8b97a; color: #c8b97a; }
     .mode-pill.chal   { border-color: #7a9ec8; color: #7a9ec8; }
     .mode-pill.party  { border-color: #b59f3b; color: #b59f3b; }
+    a.mode-pill { text-decoration: none; transition: opacity 0.15s, background 0.15s; }
+    a.mode-pill:hover { opacity: 0.8; background: rgba(255,255,255,0.05); }
 
     .wordle-preview {
       display: flex;
@@ -803,17 +806,18 @@
           <span class="live-dot"></span>
           live · playable
         </div>
-        <div class="home-project-title">Wordle Game Suite</div>
-        <div class="home-project-desc">Four modes: unlimited Solo, real-time 1v1 Duel, shareable Challenge links, and a multiplayer Party room with chat and letter reveals.</div>
+        <div class="home-project-title">WordForge</div>
+        <div class="home-project-desc">Five modes: unlimited Solo, daily shared word, real-time 1v1 Duel, shareable Challenge links, and a multiplayer Party room with chat and letter reveals.</div>
         <div class="home-project-modes">
-          <span class="mode-pill solo">Solo</span>
-          <span class="mode-pill duel">⚔️ Duel</span>
-          <span class="mode-pill chal">🎯 Challenge</span>
-          <span class="mode-pill party">🎉 Party</span>
+          <a class="mode-pill solo" href="https://wordlegames.co/" target="_blank">Solo</a>
+          <a class="mode-pill daily" href="https://wordlegames.co/daily.html" target="_blank">📅 Daily</a>
+          <a class="mode-pill duel" href="https://wordlegames.co/duel.html" target="_blank">⚔️ Duel</a>
+          <a class="mode-pill chal" href="https://wordlegames.co/challenge.html" target="_blank">🎯 Challenge</a>
+          <a class="mode-pill party" href="https://wordlegames.co/party.html" target="_blank">🎉 Party</a>
         </div>
       </div>
       <div class="home-project-actions">
-        <a class="btn btn-primary" href="https://sa1dasari.github.io/wordle_game.github.io/" target="_blank" style="font-size:11px;">▶ Play now</a>
+        <a class="btn btn-primary" href="https://wordlegames.co/" target="_blank" style="font-size:11px;">▶ Play now</a>
         <a class="btn btn-ghost" onclick="showPage('projects')" style="font-size:11px;">↗ All projects</a>
       </div>
     </div>
@@ -1239,28 +1243,23 @@
     <p style="color: var(--muted); margin-bottom: 2.5rem; max-width: 500px; font-size: 15px; line-height: 1.8;">
       Open to new opportunities, interesting conversations, and side project collabs. H1B transfer welcome — based in NYC, open to relocation.
     </p>
-    <div style="display: flex; gap: 3rem; align-items: flex-start; flex-wrap: wrap;">
-      <div class="contact-links">
-        <a class="contact-link-row" href="https://github.com/sa1dasari" target="_blank">
-          <div><div class="contact-link-label">GitHub</div><div class="contact-link-value">github.com/sa1dasari</div></div>
-          <span class="contact-arrow">↗</span>
-        </a>
-        <a class="contact-link-row" href="https://linkedin.com/in/sawan-dasari" target="_blank">
-          <div><div class="contact-link-label">LinkedIn</div><div class="contact-link-value">linkedin.com/in/sawan-dasari</div></div>
-          <span class="contact-arrow">↗</span>
-        </a>
-        <a class="contact-link-row" href="mailto:sawan.dasari@gmail.com">
-          <div><div class="contact-link-label">Email</div><div class="contact-link-value">sawan.dasari@gmail.com</div></div>
-          <span class="contact-arrow">↗</span>
-        </a>
-        <a class="contact-link-row" href="https://sa1dasari.github.io" target="_blank">
-          <div><div class="contact-link-label">Portfolio</div><div class="contact-link-value">sa1dasari.github.io</div></div>
-          <span class="contact-arrow">↗</span>
-        </a>
-      </div>
-      <div class="badge-base LI-profile-badge" data-locale="en_US" data-size="medium" data-theme="dark" data-type="VERTICAL" data-vanity="sawan-dasari" data-version="v1">
-        <a class="badge-base__link LI-simple-link" href="https://www.linkedin.com/in/sawan-dasari?trk=profile-badge">Sawan Dasari</a>
-      </div>
+    <div class="contact-links">
+      <a class="contact-link-row" href="https://github.com/sa1dasari" target="_blank">
+        <div><div class="contact-link-label">GitHub</div><div class="contact-link-value">github.com/sa1dasari</div></div>
+        <span class="contact-arrow">↗</span>
+      </a>
+      <a class="contact-link-row" href="https://linkedin.com/in/sawan-dasari" target="_blank">
+        <div><div class="contact-link-label">LinkedIn</div><div class="contact-link-value">linkedin.com/in/sawan-dasari</div></div>
+        <span class="contact-arrow">↗</span>
+      </a>
+      <a class="contact-link-row" href="mailto:sawan.dasari@gmail.com">
+        <div><div class="contact-link-label">Email</div><div class="contact-link-value">sawan.dasari@gmail.com</div></div>
+        <span class="contact-arrow">↗</span>
+      </a>
+      <a class="contact-link-row" href="https://sa1dasari.github.io" target="_blank">
+        <div><div class="contact-link-label">Portfolio</div><div class="contact-link-value">sa1dasari.github.io</div></div>
+        <span class="contact-arrow">↗</span>
+      </a>
     </div>
   </div>
   <footer>
@@ -1268,8 +1267,6 @@
     <p>Hyderabad → Cincinnati → Boston → NYC</p>
   </footer>
 </div>
-
-<script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script>
 
 <script>
   function showPage(name) {
