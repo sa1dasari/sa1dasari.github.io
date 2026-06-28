@@ -937,7 +937,7 @@
     <h2 class="section-title">GitHub Projects</h2>
     <div class="projects-grid">
 
-      <!-- ── WORDLE GAME SUITE — featured ── -->
+      <!-- ── WORDFORGE — featured ── -->
       <div class="project-card featured">
         <div>
           <div class="live-badge">
@@ -945,57 +945,60 @@
             live · playable
           </div>
           <div class="project-card-num">01</div>
-          <div class="project-card-title">Wordle Game Suite</div>
+          <div class="project-card-title">WordForge</div>
 
-          <!-- mode pills -->
+          <!-- mode pills — clickable -->
           <div class="mode-pills">
-            <span class="mode-pill solo">Solo</span>
-            <span class="mode-pill duel">⚔️ Duel</span>
-            <span class="mode-pill chal">🎯 Challenge</span>
-            <span class="mode-pill party">🎉 Party</span>
+            <a class="mode-pill solo" href="https://wordlegames.co/" target="_blank">Solo</a>
+            <a class="mode-pill daily" href="https://wordlegames.co/daily.html" target="_blank">📅 Daily</a>
+            <a class="mode-pill duel" href="https://wordlegames.co/duel.html" target="_blank">⚔️ Duel</a>
+            <a class="mode-pill chal" href="https://wordlegames.co/challenge.html" target="_blank">🎯 Challenge</a>
+            <a class="mode-pill party" href="https://wordlegames.co/party.html" target="_blank">🎉 Party</a>
           </div>
 
           <div class="project-card-desc">
-            Took the classic Wordle format and extended it into a full multiplayer suite. <strong style="color:var(--text);font-weight:400;">Solo</strong> gives you unlimited games with real-time dictionary validation via the Free Dictionary API — no bundled word list. <strong style="color:var(--text);font-weight:400;">Duel</strong> is a real-time 1v1 mode where both players race on the same word, backed by a Node.js/Socket.io server. <strong style="color:var(--text);font-weight:400;">Challenge</strong> lets you set a word, generate a shareable link, and send friends in to guess — works for multiple people off the same link. <strong style="color:var(--text);font-weight:400;">Party</strong> is a full multiplayer room with configurable word length, round timers, periodic letter reveals, a rotating setter role, scoreboard, and live chat.
+            Took the classic Wordle format and extended it into a full five-mode suite at <strong style="color:var(--text);font-weight:400;">wordlegames.co</strong>. <strong style="color:var(--text);font-weight:400;">Solo</strong> gives you unlimited games with real-time dictionary validation via the Free Dictionary API — no bundled word list. <strong style="color:var(--text);font-weight:400;">Daily</strong> serves one shared word per day, synced across all players. <strong style="color:var(--text);font-weight:400;">Duel</strong> is a real-time 1v1 mode where both players race on the same word, backed by a Node.js/Socket.io server. <strong style="color:var(--text);font-weight:400;">Challenge</strong> lets you set a word, generate a shareable link, and send friends in to guess. <strong style="color:var(--text);font-weight:400;">Party</strong> is a full multiplayer room with configurable word length, round timers, periodic letter reveals, a rotating setter role, scoreboard, and live chat.
           </div>
           <div class="project-card-tags" style="margin-bottom: 0;">
             <span class="project-card-tag">Vanilla JS</span>
             <span class="project-card-tag">Node.js</span>
             <span class="project-card-tag">Socket.io</span>
+            <span class="project-card-tag">Supabase</span>
             <span class="project-card-tag">Free Dictionary API</span>
             <span class="project-card-tag">GitHub Pages</span>
             <span class="project-card-tag">Railway</span>
           </div>
           <div class="featured-links">
-            <a class="featured-link primary" href="https://sa1dasari.github.io/wordle_game.github.io/" target="_blank">▶ Play Solo</a>
-            <a class="featured-link" href="https://sa1dasari.github.io/wordle_game.github.io/duel.html" target="_blank">⚔️ Duel</a>
-            <a class="featured-link" href="https://sa1dasari.github.io/wordle_game.github.io/challenge.html" target="_blank">🎯 Challenge</a>
-            <a class="featured-link" href="https://sa1dasari.github.io/wordle_game.github.io/party.html" target="_blank">🎉 Party</a>
+            <a class="featured-link primary" href="https://wordlegames.co/" target="_blank">▶ Play now</a>
+            <a class="featured-link" href="https://wordlegames.co/daily.html" target="_blank">📅 Daily</a>
+            <a class="featured-link" href="https://wordlegames.co/duel.html" target="_blank">⚔️ Duel</a>
+            <a class="featured-link" href="https://wordlegames.co/challenge.html" target="_blank">🎯 Challenge</a>
+            <a class="featured-link" href="https://wordlegames.co/party.html" target="_blank">🎉 Party</a>
             <a class="featured-link" href="https://github.com/sa1dasari/wordle_game.github.io" target="_blank">↗ GitHub</a>
           </div>
         </div>
-        <!-- Mini Wordle tile preview -->
+        <!-- Mini WordForge tile preview -->
         <div class="wordle-preview">
           <div class="wordle-row">
-            <div class="w-tile g">W</div>
+            <div class="w-tile g">F</div>
             <div class="w-tile x">O</div>
-            <div class="w-tile x">R</div>
-            <div class="w-tile y">L</div>
-            <div class="w-tile x">D</div>
-          </div>
-          <div class="wordle-row">
-            <div class="w-tile g">W</div>
-            <div class="w-tile g">H</div>
-            <div class="w-tile x">I</div>
-            <div class="w-tile g">L</div>
+            <div class="w-tile y">R</div>
+            <div class="w-tile x">G</div>
             <div class="w-tile x">E</div>
           </div>
           <div class="wordle-row">
-            <div class="w-tile g">W</div>
-            <div class="w-tile g">H</div>
-            <div class="w-tile g">E</div>
-            <div class="w-tile g">E</div>
+            <div class="w-tile g">F</div>
             <div class="w-tile g">L</div>
+            <div class="w-tile x">A</div>
+            <div class="w-tile g">R</div>
+            <div class="w-tile x">E</div>
+          </div>
+          <div class="wordle-row">
+            <div class="w-tile g">F</div>
+            <div class="w-tile g">L</div>
+            <div class="w-tile g">O</div>
+            <div class="w-tile g">R</div>
+            <div class="w-tile g">A</div>
           </div>
           <div class="wordle-row">
             <div class="w-tile e"> </div>
