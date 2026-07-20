@@ -4,14 +4,14 @@
     "state": "completed",
     "title": "WordForge",
     "checked_at": "2026-07-19",
-    "note": "Manually featured — lives at wordlegames.co"
+    "note": "Manually featured \u2014 lives at wordlegames.co"
   },
   "sa1dasari.github.io": {
     "included": false,
     "state": "completed",
     "title": "Portfolio site",
     "checked_at": "2026-07-19",
-    "note": "This repo itself — skip"
+    "note": "This repo itself \u2014 skip"
   },
   "fullpicture": {
     "included": true,
@@ -46,6 +46,36 @@
     "state": "in-progress",
     "title": "secwatch",
     "checked_at": "2026-07-19",
-    "note": "Manually added — SEC EDGAR alert pipeline"
+    "note": "Manually added \u2014 SEC EDGAR alert pipeline"
+  },
+  "Running-Events-Finder": {
+    "included": true,
+    "state": "in-progress",
+    "title": "NYC Running Events Finder",
+    "checked_at": "2026-07-20"
+  },
+  "sa1dasari": {
+    "included": false,
+    "state": "completed",
+    "title": "Sawan Dasari \u2013 GitHub Profile",
+    "checked_at": "2026-07-20"
+  },
+  "sawandasari": {
+    "included": false,
+    "state": "beginning",
+    "title": "About Me",
+    "checked_at": "2026-07-20"
+  },
+  "Study-of-Drift-Triggered-Retraining-Policies-Under-Budget-and-Latency-Constraints": {
+    "included": true,
+    "state": "in-progress",
+    "title": "Drift-Triggered Retraining Policies Under Budget and Latency Constraints",
+    "checked_at": "2026-07-20"
+  },
+  "wordle_game_backend": {
+    "included": true,
+    "state": "completed",
+    "title": "WordForge Duel Backend",
+    "checked_at": "2026-07-20"
   }
 }
