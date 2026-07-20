@@ -1,0 +1,10 @@
+{
+  "excluded_repos": [
+    "sa1dasari.github.io",
+    "wordle_game.github.io",
+    "weather_alert",
+    "Rendr.github.io"
+
+  ],
+  "description": "List of repositories to exclude from portfolio assessment"
+}
