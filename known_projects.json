@@ -1,0 +1,51 @@
+{
+  "wordle_game.github.io": {
+    "included": true,
+    "state": "completed",
+    "title": "WordForge",
+    "checked_at": "2026-07-19",
+    "note": "Manually featured — lives at wordlegames.co"
+  },
+  "sa1dasari.github.io": {
+    "included": false,
+    "state": "completed",
+    "title": "Portfolio site",
+    "checked_at": "2026-07-19",
+    "note": "This repo itself — skip"
+  },
+  "fullpicture": {
+    "included": true,
+    "state": "completed",
+    "title": "fullpicture",
+    "checked_at": "2026-07-19",
+    "note": "Manually added"
+  },
+  "Personal-Finance-Tracker": {
+    "included": true,
+    "state": "completed",
+    "title": "Personal Finance Tracker",
+    "checked_at": "2026-07-19",
+    "note": "Manually added"
+  },
+  "tailoring_resume": {
+    "included": true,
+    "state": "completed",
+    "title": "tailoring_resume",
+    "checked_at": "2026-07-19",
+    "note": "Manually added"
+  },
+  "paper-to-prototype": {
+    "included": true,
+    "state": "completed",
+    "title": "paper-to-prototype",
+    "checked_at": "2025-01-01",
+    "note": "Manually added"
+  },
+  "secwatch": {
+    "included": true,
+    "state": "in-progress",
+    "title": "secwatch",
+    "checked_at": "2026-07-19",
+    "note": "Manually added — SEC EDGAR alert pipeline"
+  }
+}
