@@ -1,0 +1,40 @@
+name: Portfolio Agent
+
+on:
+  schedule:
+    # Runs every 2 weeks on Monday at 9am UTC, starting 2026-07-21
+    - cron: "0 9 21,4 * 1"
+  workflow_dispatch:
+    # Also allows manual trigger from GitHub Actions UI
+
+jobs:
+  update-portfolio:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write       # push branch
+      pull-requests: write  # open PR
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0    # full history so git push works cleanly
+          token: ${{ secrets.GH_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Run portfolio agent
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python agent.py
+
+      - name: Summary
+        if: always()
+        run: echo "Agent run complete. Check PR tab for any new project additions."
