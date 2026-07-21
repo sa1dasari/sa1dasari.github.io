@@ -1,4 +1,4 @@
-import os
+﻿import os
 import json
 import re
 import sys
@@ -113,7 +113,7 @@ def assess_repo(repo, readme, commits):
     """Ask Claude to assess repo state and generate portfolio card HTML."""
     prompt = f"""You are helping update a software engineer's portfolio website.
 
-Analyze this GitHub repository and respond ONLY with a JSON object — no markdown, no backticks, no preamble.
+Analyze this GitHub repository and respond ONLY with a JSON object - no markdown, no backticks, no preamble.
 
 Repository info:
 - Name: {repo['name']}
@@ -134,7 +134,7 @@ Return exactly this JSON shape:
   "reason": "one sentence why or why not to include in portfolio",
   "state": "beginning" or "in-progress" or "completed",
   "title": "clean display title (not the raw repo name)",
-  "description": "2-3 sentence description written for a portfolio audience — what it does, why it's interesting, what problem it solves. Do NOT start with 'I'. Do NOT use buzzwords.",
+  "description": "2-3 sentence description written for a portfolio audience - what it does, why it's interesting, what problem it solves. Do NOT start with 'I'. Do NOT use buzzwords.",
   "tags": ["tag1", "tag2", "tag3"],  // 3-5 tech stack tags
   "github_url": "https://github.com/{GITHUB_USERNAME}/{repo['name']}"
 }}
@@ -228,7 +228,7 @@ def run(cmd, **kwargs):
 
 def create_pr(branch, added_titles):
     today = datetime.date.today().isoformat()
-    title = f"[portfolio-agent] Add {len(added_titles)} new project(s) — {today}"
+    title = f"[portfolio-agent] Add {len(added_titles)} new project(s) - {today}"
     body = (
             "## Portfolio auto-update\n\n"
             "The portfolio agent found new GitHub repos and added them to the projects page.\n\n"
