@@ -153,12 +153,7 @@ State:
 
 def generate_card_html(assessment, card_num):
     """Generate the project card HTML for the portfolio."""
-    state = assessment["state"]
-    state_badge = {
-        "beginning":   '<span class="state-badge beginning">🌱 early</span>',
-        "in-progress": '<span class="state-badge in-progress">⚡ in progress</span>',
-        "completed":   '<span class="state-badge completed">✓ completed</span>',
-    }.get(state, "")
+    # State is tracked internally but not displayed on portfolio
 
     tags_html = "\n            ".join(
         f'<span class="project-card-tag">{t}</span>'
@@ -171,7 +166,7 @@ def generate_card_html(assessment, card_num):
       <div class="project-card">
         <a class="project-link" href="{assessment['github_url']}" target="_blank">↗ github</a>
         <div class="project-card-num">{num_str}</div>
-        <div class="project-card-title">{assessment['title']} {state_badge}</div>
+        <div class="project-card-title">{assessment['title']}</div>
         <div class="project-card-desc">{assessment['description']}</div>
         <div class="project-card-tags">
             {tags_html}
@@ -187,24 +182,6 @@ def patch_index(new_cards_html, new_state_css_needed):
     """
     html = Path(INDEX_FILE).read_text()
 
-    # Inject state-badge CSS if not already there
-    if "state-badge" not in html and new_state_css_needed:
-        state_css = """
-    /* Auto-generated project state badges */
-    .state-badge {
-      font-family: var(--font-mono);
-      font-size: 9px;
-      padding: 2px 7px;
-      border-radius: 20px;
-      letter-spacing: 0.06em;
-      margin-left: 6px;
-      vertical-align: middle;
-    }
-    .state-badge.beginning  { border: 1px solid #8fa88f; color: #8fa88f; }
-    .state-badge.in-progress { border: 1px solid #c8b97a; color: #c8b97a; }
-    .state-badge.completed  { border: 1px solid #6aaa64; color: #6aaa64; }
-"""
-        html = html.replace("    /* MOBILE */", state_css + "    /* MOBILE */")
 
     # Find the end of the projects-grid div and insert before it
     # Look for the closing pattern after the last project card
@@ -259,7 +236,6 @@ def create_pr(branch, added_titles):
             + "\n".join(f"- **{t}**" for t in added_titles)
             + "\n\n### Review checklist\n"
               "- [ ] Descriptions are accurate\n"
-              "- [ ] State badges look right (🌱 early / ⚡ in progress / ✓ completed)\n"
               "- [ ] Tags are appropriate\n"
               "- [ ] Card order makes sense\n\n"
               "_Merge to publish to GitHub Pages._"
