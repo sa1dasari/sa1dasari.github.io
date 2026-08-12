@@ -77,5 +77,11 @@
     "state": "completed",
     "title": "WordForge Duel Backend",
     "checked_at": "2026-07-20"
+  },
+  "Rendr": {
+    "included": true,
+    "state": "beginning",
+    "title": "Rendr \u2013 Resume-Driven Portfolio Generator",
+    "checked_at": "2026-08-10"
   }
 }
