@@ -572,7 +572,10 @@
       flex-wrap: wrap;
     }
 
-    .home-project-left { flex: 1; min-width: 0; }
+    .home-project-divider {
+      border-top: 1px solid var(--border);
+      margin: 1.5rem 0;
+    }
 
     .home-project-title {
       font-size: 15px;
@@ -801,7 +804,7 @@
 
     <!-- Featured project on home -->
     <div class="home-project-card">
-      <div class="home-project-left">
+      <div class="home-project-up">
         <div class="live-badge" style="margin-bottom: 0.6rem;">
           <span class="live-dot"></span>
           live · playable
@@ -820,8 +823,29 @@
         <a class="btn btn-primary" href="https://wordlegames.co/" target="_blank" style="font-size:11px;">▶ Play now</a>
         <a class="btn btn-ghost" onclick="showPage('projects')" style="font-size:11px;">↗ All projects</a>
       </div>
+
+      <div class="home-project-divider" style="width:100%;"></div>
+
+      <div class="home-project-down">
+        <div class="live-badge" style="margin-bottom: 0.6rem; border-color: var(--accent3); color: var(--accent3);">
+          <span class="live-dot" style="background: var(--accent3);"></span>
+          preprint · arXiv
+        </div>
+        <div class="home-project-title">When to Retrain: Drift-Triggered Retraining Policies</div>
+        <div class="home-project-desc">A 3,933-run empirical study comparing periodic, error-threshold, and drift-triggered (ADWIN) retraining policies under explicit budget and latency constraints for streaming ML, evaluated on synthetic and real-world data.</div>
+        <div class="home-project-modes">
+          <span class="tag">cs.LG</span>
+          <span class="tag">3,933 runs</span>
+          <span class="tag">Concept Drift</span>
+          <span class="tag">ADWIN</span>
+        </div>
+      </div>
+      <div class="home-project-actions">
+        <a class="btn btn-primary" href="https://arxiv.org/abs/2608.19488" target="_blank" style="font-size:11px;">↗ Read on arXiv</a>
+        <a class="btn btn-ghost" href="https://github.com/sa1dasari/Study-of-Drift-Triggered-Retraining-Policies-Under-Budget-and-Latency-Constraints" target="_blank" style="font-size:11px;">GitHub</a>
+      </div>
     </div>
-  </div>
+    </div>
 
   <footer>
     <p>sa1dasari.github.io</p>
@@ -1008,6 +1032,22 @@
             <div class="w-tile e"> </div>
           </div>
         </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-card-num">0X</div>
+        <div class="project-card-title">Research Paper: Drift-Triggered Retraining Policies</div>
+        <div class="project-card-desc">
+          A 3,933-run empirical study comparing periodic, error-threshold, and drift-triggered (ADWIN) retraining policies under explicit budget and latency constraints for streaming ML, evaluated on synthetic and real-world data (LUFlow, LendingClub). Published as a preprint on arXiv.
+        </div>
+        <div class="project-card-tags">
+          <span class="project-card-tag">Python</span>
+          <span class="project-card-tag">scikit-learn</span>
+          <span class="project-card-tag">Concept Drift</span>
+          <span class="project-card-tag">ADWIN</span>
+          <span class="project-card-tag">Empirical ML</span>
+        </div>
+        <a class="project-link" href="https://arxiv.org/abs/2608.19488" target="_blank">↗ arXiv</a>
       </div>
 
       <div class="project-card">
