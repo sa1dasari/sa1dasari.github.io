@@ -83,5 +83,11 @@
     "state": "beginning",
     "title": "Rendr \u2013 Resume-Driven Portfolio Generator",
     "checked_at": "2026-08-10"
+  },
+  "habituate": {
+    "included": true,
+    "state": "in-progress",
+    "title": "Habituate \u2014 Habit Tracker with Pattern Insights",
+    "checked_at": "2026-09-21"
   }
 }
