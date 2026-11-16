@@ -89,5 +89,11 @@
     "state": "in-progress",
     "title": "Habituate",
     "checked_at": "2026-10-12"
+  },
+  "sysdesign": {
+    "included": true,
+    "state": "completed",
+    "title": "System Design Visualizer (Claude Code Skill)",
+    "checked_at": "2026-11-16"
   }
 }
